@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 export default function Philosophy() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   const line1 = "Form gives shape to intention.";
   const line2 = "Function gives it purpose.";

@@ -82,7 +82,7 @@ export default function Hero() {
             ],
           }}
           transition={{
-            duration: 14,
+            duration: 11,
             repeat: Infinity,
             ease: "linear",
           }}
@@ -103,10 +103,10 @@ export default function Hero() {
             y: [80, 80, 160, 160, 240, 240, 320, 320, 240, 240, 160, 160, 80],
           }}
           transition={{
-            duration: 16,
+            duration: 13,
             repeat: Infinity,
             ease: "linear",
-            delay: 5,
+            delay: 4,
           }}
         />
 
@@ -125,10 +125,48 @@ export default function Hero() {
             y: [240, 240, 320, 320, 400, 400, 480, 480, 400, 400, 320, 320],
           }}
           transition={{
-            duration: 15,
+            duration: 12,
             repeat: Infinity,
             ease: "linear",
-            delay: 3,
+            delay: 2,
+          }}
+        />
+
+        {/* Dot 4 - Bottom right path */}
+        <motion.div
+          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          style={{
+            background: "#9a9a9a",
+            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+          }}
+          animate={{
+            x: [960, 1040, 1040, 1120, 1120, 1040, 1040, 960, 960],
+            y: [480, 480, 560, 560, 640, 640, 560, 560, 480],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 6,
+          }}
+        />
+
+        {/* Dot 5 - Bottom right path */}
+        <motion.div
+          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          style={{
+            background: "#9a9a9a",
+            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+          }}
+          animate={{
+            x: [1120, 1200, 1200, 1280, 1280, 1200, 1200, 1120, 1120],
+            y: [560, 560, 640, 640, 720, 720, 640, 640, 560],
+          }}
+          transition={{
+            duration: 11,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 7,
           }}
         />
       </div>
