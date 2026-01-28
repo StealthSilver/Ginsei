@@ -1,16 +1,16 @@
 import Image from "next/image";
-import { Twitter } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   return (
     <footer className="relative bg-[#0E0E0E] text-white overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-24">
-          {/* Left Side - Logo, Social, Copyright */}
-          <div className="space-y-8">
-            {/* Logo */}
-            <div>
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-16 lg:gap-32 mb-16">
+          {/* Left Side - Logo with X, Contact Info */}
+          <div className="flex flex-col space-y-10 lg:space-y-12">
+            {/* Logo and X Icon */}
+            <div className="flex items-center gap-6">
               <Image
                 src="/ginseil.svg"
                 alt="Ginseil Logo"
@@ -18,57 +18,27 @@ export default function Footer() {
                 height={36}
                 className="block h-9 w-auto"
               />
-            </div>
-
-            {/* Social Link */}
-            <div>
               <a
                 href="https://twitter.com/gensei"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300"
-                aria-label="Follow us on Twitter"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 group"
+                aria-label="Follow us on X"
               >
-                <Twitter className="w-5 h-5" />
+                <FaXTwitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
               </a>
-            </div>
-
-            {/* Copyright */}
-            <div>
-              <p className="text-sm text-gray-500">
-                © {new Date().getFullYear()} Gensei. All rights reserved.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Side - Contact Information */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12">
-            {/* Address */}
-            <div>
-              <h4 className="text-xs uppercase tracking-widest text-gray-500 mb-4">
-                Location
-              </h4>
-              <address className="text-sm text-gray-300 leading-relaxed not-italic">
-                201 – 2nd Main Road,
-                <br />
-                Horamavu, Banaswadi,
-                <br />
-                Bengaluru – Karnataka, India
-                <br />
-                560043
-              </address>
             </div>
 
             {/* Contact Details */}
             <div>
-              <h4 className="text-xs uppercase tracking-widest text-gray-500 mb-4">
+              <h4 className="text-xs uppercase tracking-[0.15em] text-gray-400 font-medium mb-5">
                 Contact
               </h4>
-              <div className="space-y-3 text-sm text-gray-300 leading-relaxed">
+              <div className="space-y-3 text-sm text-gray-300 leading-[1.8]">
                 <p>
                   <a
                     href="tel:+918533922485"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 inline-block"
                   >
                     +91 8533922485
                   </a>
@@ -76,33 +46,55 @@ export default function Footer() {
                 <p>
                   <a
                     href="mailto:info@gensei.org"
-                    className="hover:text-white transition-colors duration-300"
+                    className="hover:text-white transition-colors duration-300 inline-block"
                   >
-                    info@gensei.org
+                    info@ginsei.org
                   </a>
                 </p>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Form & Function Text - Centered at Bottom */}
-        <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-600 font-light">
-            Form & Function
-          </p>
+            {/* Copyright */}
+            <p className="text-sm text-gray-500 leading-relaxed">
+              © {new Date().getFullYear()} Ginsei. All rights reserved.
+            </p>
+          </div>
+
+          {/* Right Side - Location */}
+          <div>
+            <h4 className="text-xs uppercase tracking-[0.15em] text-gray-400 font-medium mb-5">
+              Location
+            </h4>
+            <address className="text-sm text-gray-300 leading-[1.8] not-italic">
+              201 – 2nd Main Road,
+              <br />
+              Horamavu, Banaswadi,
+              <br />
+              Bengaluru – Karnataka, India
+              <br />
+              560043
+            </address>
+          </div>
         </div>
       </div>
 
-      {/* Subtle Background Gradient */}
+      {/* Oversized Background Typography with Gradient Fade - Centered */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(110, 126, 255, 0.03), transparent)",
-        }}
+        className="absolute bottom-0 left-0 right-0 pointer-events-none select-none flex justify-center"
         aria-hidden="true"
-      />
+      >
+        <div
+          className="text-[8vw] lg:text-[8vw] font-bold tracking-tight text-white whitespace-nowrap overflow-hidden"
+          style={{
+            WebkitMaskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.04) 50%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.04) 50%, transparent 100%)",
+          }}
+        >
+          FORM & FUNCTION
+        </div>
+      </div>
     </footer>
   );
 }

@@ -51,7 +51,7 @@ export default function CTA() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex items-center bg-[#0E0E0E] overflow-hidden py-32"
+      className="relative  flex items-center bg-[#0E0E0E] overflow-hidden py-32"
       ref={ref}
     >
       {/* Subtle animated background elements - Same as Hero */}
