@@ -44,10 +44,10 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div
-          className={`flex items-center justify-between py-3 px-4 transition-all duration-700 ease-in-out ${
+          className={`flex items-center justify-between py-3 px-4 transition-all duration-700 ease-in-out border ${
             isScrolled
-              ? "border border-[#9a9a9a]/30 shadow-lg shadow-[#9a9a9a]/10"
-              : ""
+              ? "border-[#9a9a9a]/30 shadow-lg shadow-[#9a9a9a]/10"
+              : "border-transparent"
           }`}
         >
           {/* Logo and Navigation - Left */}

@@ -70,9 +70,9 @@ export default function Philosophy() {
         >
           {/* Small label */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
+            <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)]">
               Philosophy
-            </span>
+            </h2>
           </motion.div>
 
           {/* Main quote - Letter by letter animation */}

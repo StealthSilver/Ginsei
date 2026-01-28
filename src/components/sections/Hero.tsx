@@ -180,9 +180,9 @@ export default function Hero() {
         >
           {/* Small label */}
           <motion.div variants={fadeInUp} className="mb-8">
-            <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
+            <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)]">
               Design Studio
-            </span>
+            </h2>
           </motion.div>
 
           {/* Main heading - Letter by letter animation */}
@@ -235,11 +235,11 @@ export default function Hero() {
           <motion.div variants={fadeInUp} initial="hidden" animate="visible">
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+              className="group inline-flex items-center gap-2 px-8 py-3.5 text-[16px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
             >
               Connect
               <svg
-                className="w-4 h-4 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                className="w-5 h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
