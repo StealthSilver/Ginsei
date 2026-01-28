@@ -3,184 +3,145 @@
 import { motion } from "framer-motion";
 
 export default function Hero() {
-  // Letter by letter animation
-  const text1 = "Crafting";
-  const text2 = "Digital";
-  const text3 = "Excellence";
-
-  const letterAnimation = {
-    hidden: { opacity: 0, y: 50, rotateX: -90 },
-    visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: {
-        duration: 0.8,
-        delay: i * 0.08,
-        ease: [0.6, 0.05, 0.01, 0.9] as const,
-      },
-    }),
-  };
-
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        delay: 2.5,
+        duration: 0.6,
         ease: [0.6, 0.05, 0.01, 0.9] as const,
       },
     },
   };
 
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
   return (
-    <section className="relative h-screen flex items-center justify-end px-6 lg:px-20 bg-gradient-to-br from-[#0A0A0A] via-[#0E0E0E] to-[#1A1A1A] overflow-hidden">
-      {/* Animated background elements */}
+    <section className="relative h-screen flex items-center px-6 lg:px-20 bg-[#0E0E0E] overflow-hidden">
+      {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 0.04, scale: 1.2, rotate: 45 }}
-          transition={{ duration: 3, ease: "easeOut" }}
-          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-purple-500 to-pink-500 rounded-full blur-[150px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.015 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-white rounded-full blur-[120px]"
         />
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 0.03, scale: 1.1, rotate: -30 }}
-          transition={{ duration: 3, delay: 0.5, ease: "easeOut" }}
-          className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-gradient-to-tr from-blue-500 to-cyan-500 rounded-full blur-[140px]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.01 }}
+          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
+          className="absolute bottom-1/3 left-1/2 w-[400px] h-[400px] bg-white rounded-full blur-[100px]"
         />
 
-        {/* Floating geometric shapes */}
-        <motion.div
-          animate={{
-            y: [0, -30, 0],
-            rotate: [0, 180, 360],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/3 right-1/4 w-20 h-20 border border-white/5 rounded-lg"
-        />
-        <motion.div
-          animate={{
-            y: [0, 40, 0],
-            rotate: [0, -180, -360],
-          }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/3 right-1/3 w-32 h-32 border border-white/5 rounded-full"
-        />
+        {/* Subtle grid lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
       </div>
 
-      <div className="max-w-7xl w-full flex flex-col items-end text-right relative z-10">
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate="visible"
+        className="max-w-6xl relative z-10"
+      >
         {/* Small label */}
-        <motion.p
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 0.5, x: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="text-xs sm:text-sm tracking-[0.3em] uppercase text-[rgba(245,245,245,0.5)] mb-12 font-light"
+        <motion.div variants={fadeInUp} className="mb-8">
+          <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
+            Design Studio
+          </span>
+        </motion.div>
+
+        {/* Main heading - Clean & Modern */}
+        <motion.h1
+          variants={fadeInUp}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] mb-6 tracking-tight"
+          style={{ fontFamily: "var(--font-inter), sans-serif" }}
         >
-          Design Studio
-        </motion.p>
-
-        {/* Main heading - MASSIVE with letter animation */}
-        <div className="mb-8 perspective-1000">
-          {/* Line 1 */}
-          <h1 className="text-8xl sm:text-9xl md:text-[12rem] lg:text-[16rem] leading-[0.85] font-black text-[#F5F5F5] tracking-tighter mb-4 font-display">
-            {text1.split("").map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={letterAnimation}
-                initial="hidden"
-                animate="visible"
-                className="inline-block"
-                style={{
-                  transformOrigin: "center bottom",
-                  fontFamily: "'Playfair Display', serif",
-                  fontStyle: "italic",
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </h1>
-
-          {/* Line 2 */}
-          <h1 className="text-8xl sm:text-9xl md:text-[12rem] lg:text-[16rem] leading-[0.85] font-black mb-4 tracking-tighter">
-            {text2.split("").map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i + text1.length}
-                variants={letterAnimation}
-                initial="hidden"
-                animate="visible"
-                className="inline-block bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent"
-                style={{
-                  transformOrigin: "center bottom",
-                  fontFamily: "'Playfair Display', serif",
-                  fontStyle: "italic",
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </h1>
-
-          {/* Line 3 */}
-          <h1 className="text-8xl sm:text-9xl md:text-[12rem] lg:text-[16rem] leading-[0.85] font-black text-[#F5F5F5] tracking-tighter font-display">
-            {text3.split("").map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i + text1.length + text2.length}
-                variants={letterAnimation}
-                initial="hidden"
-                animate="visible"
-                className="inline-block"
-                style={{
-                  transformOrigin: "center bottom",
-                  fontFamily: "'Playfair Display', serif",
-                  fontStyle: "italic",
-                  textShadow: "0 0 40px rgba(255,255,255,0.1)",
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </h1>
-        </div>
+          Crafting Digital
+          <br />
+          <span className="text-[rgba(245,245,245,0.5)]">Excellence</span>
+        </motion.h1>
 
         {/* Description */}
         <motion.p
           variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="text-xl sm:text-2xl md:text-3xl text-[rgba(245,245,245,0.6)] max-w-2xl mb-12 leading-relaxed"
-          style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}
+          className="text-base sm:text-lg md:text-xl text-[rgba(245,245,245,0.5)] max-w-xl mb-12 leading-relaxed font-light"
+          style={{ fontFamily: "var(--font-inter), sans-serif" }}
         >
-          Where art meets technology,
-          <br />
-          <span className="text-[rgba(245,245,245,0.4)]">
-            creating experiences that inspire.
-          </span>
+          Where art meets technology, creating experiences that inspire and
+          transform digital landscapes.
         </motion.p>
 
-        {/* Scroll indicator - repositioned */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3, duration: 1 }}
-          className="absolute bottom-12 right-12 flex flex-col items-end gap-3 text-sm text-[rgba(245,245,245,0.4)]"
-        >
-          <span className="tracking-[0.2em] uppercase text-xs font-light">
-            Scroll
-          </span>
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[1px] h-16 bg-gradient-to-b from-[rgba(245,245,245,0.4)] via-[rgba(245,245,245,0.2)] to-transparent"
-          />
+        {/* CTA Button */}
+        <motion.div variants={fadeInUp} className="flex gap-4">
+          <a
+            href="#contact"
+            className="group relative px-6 py-3 text-sm font-medium text-white overflow-hidden rounded-full"
+          >
+            <span className="absolute inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/15" />
+            <span className="relative flex items-center gap-2">
+              Get Started
+              <svg
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </span>
+          </a>
         </motion.div>
-      </div>
+
+        {/* Stats or features - subtle */}
+        <motion.div
+          variants={fadeInUp}
+          className="mt-20 flex gap-12 text-sm"
+          style={{ fontFamily: "var(--font-inter), sans-serif" }}
+        >
+          <div>
+            <div className="text-2xl font-semibold text-white mb-1">50+</div>
+            <div className="text-[rgba(245,245,245,0.4)]">Projects</div>
+          </div>
+          <div>
+            <div className="text-2xl font-semibold text-white mb-1">5+</div>
+            <div className="text-[rgba(245,245,245,0.4)]">Years</div>
+          </div>
+          <div>
+            <div className="text-2xl font-semibold text-white mb-1">100%</div>
+            <div className="text-[rgba(245,245,245,0.4)]">Satisfaction</div>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-6 lg:left-20 flex items-center gap-3 text-xs text-[rgba(245,245,245,0.3)]"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[1px] h-12 bg-gradient-to-b from-[rgba(245,245,245,0.3)] to-transparent"
+        />
+        <span className="tracking-[0.15em] uppercase">Scroll</span>
+      </motion.div>
     </section>
   );
 }
