@@ -52,24 +52,11 @@ export default function Philosophy() {
   return (
     <section
       id="philosophy"
-      className="relative h-screen flex items-center bg-[#0E0E0E] overflow-hidden"
+      className="relative flex items-center bg-[#0E0E0E] overflow-hidden"
       ref={ref}
     >
       {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.015 } : { opacity: 0 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-white rounded-full blur-[120px]"
-        />
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.01 } : { opacity: 0 }}
-          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
-          className="absolute bottom-1/3 right-1/2 w-[400px] h-[400px] bg-white rounded-full blur-[100px]"
-        />
-
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
       </div>
@@ -99,7 +86,7 @@ export default function Philosophy() {
             </motion.div>
 
             <blockquote
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5] tracking-tight italic"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5] tracking-tight italic max-w-6xl"
               style={{ fontFamily: "var(--font-inter), sans-serif" }}
             >
               {line1.split("").map((letter, i) => (
@@ -147,7 +134,7 @@ export default function Philosophy() {
             {/* Closing quotation mark */}
             <motion.div
               variants={fadeInUp}
-              className="absolute -right-8 -bottom-8 text-6xl text-[rgba(245,245,245,0.2)] font-serif"
+              className="absolute -right-8 -bottom-4 text-6xl text-[rgba(245,245,245,0.2)] font-serif"
             >
               "
             </motion.div>
