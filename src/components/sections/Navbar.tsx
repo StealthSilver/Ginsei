@@ -35,7 +35,7 @@ export default function Navbar() {
             {/* Logo */}
             <a
               href="#"
-              className="shrink-0 flex items-baseline leading-none focus:outline-none focus:ring-2 focus:ring-[#6e7eff] focus:ring-offset-2 focus:ring-offset-[#0E0E0E] rounded-sm"
+              className="shrink-0 flex items-baseline leading-none focus:outline-none  focus:ring-offset-2 focus:ring-offset-[#0E0E0E] rounded-sm"
             >
               <Image
                 src="/ginseil.svg"
