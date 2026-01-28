@@ -1,8 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const Approach = () => {
+  const [activeRects, setActiveRects] = useState<Set<number>>(new Set());
+
+  const toggleRect = (index: number) => {
+    setActiveRects((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(index)) {
+        newSet.delete(index);
+      } else {
+        newSet.add(index);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <section
       id="approach"
@@ -66,12 +80,18 @@ const Approach = () => {
             <div className="absolute inset-0 flex items-center justify-center">
               {/* Intersecting rectangles */}
               <div className="rectangles-container">
-                <div className="rect rect-1" />
-                <div className="rect rect-2" />
-                <div className="rect rect-3" />
-                <div className="rect rect-4" />
-                <div className="rect rect-5" />
-                <div className="rect rect-6" />
+                <div
+                  className={`rect rect-1 ${activeRects.has(1) ? "active" : ""}`}
+                  onClick={() => toggleRect(1)}
+                />
+                <div
+                  className={`rect rect-2 ${activeRects.has(2) ? "active" : ""}`}
+                  onClick={() => toggleRect(2)}
+                />
+                <div
+                  className={`rect rect-3 ${activeRects.has(3) ? "active" : ""}`}
+                  onClick={() => toggleRect(3)}
+                />
               </div>
             </div>
           </div>
@@ -82,99 +102,78 @@ const Approach = () => {
         /* Rectangles container */
         .rectangles-container {
           position: relative;
-          width: 400px;
-          height: 400px;
+          width: 500px;
+          height: 500px;
         }
 
         .rect {
           position: absolute;
           border: 1px solid rgba(229, 231, 235, 0.4);
           background: transparent;
+          cursor: pointer;
+          transition:
+            background 0.4s ease,
+            border-color 0.4s ease;
+        }
+
+        .rect:hover {
+          border-color: rgba(229, 231, 235, 0.6);
+        }
+
+        .rect.active {
+          background: linear-gradient(
+            135deg,
+            rgba(60, 60, 60, 0.15) 0%,
+            rgba(80, 80, 80, 0.1) 50%,
+            rgba(60, 60, 60, 0.15) 100%
+          );
+          border-color: rgba(229, 231, 235, 0.5);
         }
 
         .rect-1 {
-          width: 240px;
-          height: 160px;
-          top: 50px;
-          left: 40px;
+          width: 340px;
+          height: 240px;
+          top: 20px;
+          left: 10px;
           transform: rotate(-8deg);
         }
 
         .rect-2 {
-          width: 190px;
-          height: 260px;
-          top: 80px;
-          right: 60px;
+          width: 280px;
+          height: 340px;
+          top: 60px;
+          right: 10px;
           transform: rotate(12deg);
         }
 
         .rect-3 {
-          width: 260px;
-          height: 120px;
-          bottom: 100px;
-          left: 80px;
-          transform: rotate(5deg);
-        }
-
-        .rect-4 {
-          width: 210px;
-          height: 210px;
-          top: 120px;
-          left: 120px;
-          transform: rotate(-15deg);
-        }
-
-        .rect-5 {
-          width: 140px;
-          height: 240px;
-          bottom: 80px;
-          right: 100px;
-          transform: rotate(18deg);
-        }
-
-        .rect-6 {
-          width: 280px;
-          height: 150px;
-          top: 180px;
+          width: 360px;
+          height: 190px;
+          bottom: 20px;
           left: 60px;
-          transform: rotate(-4deg);
+          transform: rotate(5deg);
         }
 
         /* Responsive adjustments */
         @media (max-width: 1024px) {
           .rectangles-container {
-            width: 320px;
-            height: 320px;
+            width: 380px;
+            height: 380px;
           }
 
           .rect-1 {
-            width: 190px;
-            height: 120px;
+            width: 260px;
+            height: 180px;
           }
 
           .rect-2 {
-            width: 150px;
-            height: 210px;
+            width: 210px;
+            height: 260px;
           }
 
           .rect-3 {
-            width: 210px;
-            height: 95px;
-          }
-
-          .rect-4 {
-            width: 170px;
-            height: 170px;
-          }
-
-          .rect-5 {
-            width: 110px;
-            height: 190px;
-          }
-
-          .rect-6 {
-            width: 230px;
-            height: 120px;
+            width: 280px;
+            height: 145px;
           }
         }
       `}</style>
