@@ -8,14 +8,32 @@ export default function Philosophy() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
+  const line1 = "Form gives shape to intention.";
+  const line2 = "Function gives it purpose.";
+  const line3 = "We design systems where clarity and beauty coexist.";
+
+  const letterAnimation = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: i * 0.05,
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
+      },
+    }),
+  };
+
   const fadeInUp = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.6, 0.05, 0.01, 0.9] as [number, number, number, number],
+        delay: line1.length * 0.05 + line2.length * 0.05 + 0.3,
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
       },
     },
   };
@@ -25,72 +43,117 @@ export default function Philosophy() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       },
     },
   };
 
   return (
-    <section id="philosophy" className="py-32 px-6 bg-gray-50" ref={ref}>
-      <motion.div
-        className="max-w-6xl mx-auto"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={staggerContainer}
-      >
-        <motion.h2
-          variants={fadeInUp}
-          className="text-5xl md:text-6xl font-bold text-gray-900 mb-12"
-        >
-          Our Philosophy
-        </motion.h2>
+    <section
+      id="philosophy"
+      className="relative h-screen flex items-center bg-[#0E0E0E] overflow-hidden"
+      ref={ref}
+    >
+      {/* Subtle animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 0.015 } : { opacity: 0 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-white rounded-full blur-[120px]"
+        />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 0.01 } : { opacity: 0 }}
+          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
+          className="absolute bottom-1/3 right-1/2 w-[400px] h-[400px] bg-white rounded-full blur-[100px]"
+        />
+
+        {/* Subtle grid lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
         <motion.div
           variants={staggerContainer}
-          className="grid md:grid-cols-2 gap-16"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="relative z-10"
         >
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Design with Purpose
-            </h3>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Every pixel, every interaction, and every element serves a
-              purpose. We believe in creating designs that not only look
-              beautiful but also solve real problems and enhance user
-              experiences.
-            </p>
+          {/* Small label */}
+          <motion.div variants={fadeInUp} className="mb-8">
+            <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
+              Philosophy
+            </span>
           </motion.div>
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Innovation Through Simplicity
-            </h3>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              True innovation doesn't require complexity. We strip away the
-              unnecessary to reveal elegant solutions that are intuitive,
-              accessible, and timeless.
-            </p>
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Collaboration & Trust
-            </h3>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              The best work comes from strong partnerships. We work closely with
-              our clients, treating their vision as our own and building lasting
-              relationships based on trust and transparency.
-            </p>
-          </motion.div>
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
-              Continuous Evolution
-            </h3>
-            <p className="text-lg text-gray-600 leading-relaxed">
-              The digital landscape never stops changing, and neither do we. We
-              stay ahead of trends, embrace new technologies, and constantly
-              refine our craft to deliver cutting-edge solutions.
-            </p>
-          </motion.div>
+
+          {/* Main quote - Letter by letter animation */}
+          <div className="mb-6 relative">
+            {/* Opening quotation mark */}
+            <motion.div
+              variants={fadeInUp}
+              className="absolute -left-8 -top-4 text-6xl text-[rgba(245,245,245,0.2)] font-serif"
+            >
+              "
+            </motion.div>
+
+            <blockquote
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5] tracking-tight italic"
+              style={{ fontFamily: "var(--font-inter), sans-serif" }}
+            >
+              {line1.split("").map((letter, i) => (
+                <motion.span
+                  key={i}
+                  custom={i}
+                  variants={letterAnimation}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  className="inline-block"
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </motion.span>
+              ))}
+              <br />
+              {line2.split("").map((letter, i) => (
+                <motion.span
+                  key={i}
+                  custom={i + line1.length}
+                  variants={letterAnimation}
+                  initial="hidden"
+                  animate={isInView ? "visible" : "hidden"}
+                  className="inline-block"
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </motion.span>
+              ))}
+              <br />
+              <span className="text-[rgba(245,245,245,0.6)]">
+                {line3.split("").map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i + line1.length + line2.length}
+                    variants={letterAnimation}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                    className="inline-block"
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </motion.span>
+                ))}
+              </span>
+            </blockquote>
+
+            {/* Closing quotation mark */}
+            <motion.div
+              variants={fadeInUp}
+              className="absolute -right-8 -bottom-8 text-6xl text-[rgba(245,245,245,0.2)] font-serif"
+            >
+              "
+            </motion.div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

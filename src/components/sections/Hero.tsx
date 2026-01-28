@@ -62,6 +62,48 @@ export default function Hero() {
 
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+
+        {/* Animated grid lines - Horizontal */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`h-${i}`}
+            className="absolute h-[1px] w-[160px] bg-gradient-to-r from-transparent via-[#9a9a9a] to-transparent"
+            style={{
+              top: `${15 + i * 15}%`,
+              left: 0,
+            }}
+            animate={{
+              x: ["0%", "100vw"],
+            }}
+            transition={{
+              duration: 8 + Math.random() * 6,
+              repeat: Infinity,
+              delay: i * 1.2 + Math.random() * 2,
+              ease: "linear",
+            }}
+          />
+        ))}
+
+        {/* Animated grid lines - Vertical */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`v-${i}`}
+            className="absolute w-[1px] h-[160px] bg-gradient-to-b from-transparent via-[#9a9a9a] to-transparent"
+            style={{
+              left: `${10 + i * 15}%`,
+              top: 0,
+            }}
+            animate={{
+              y: ["0%", "100vh"],
+            }}
+            transition={{
+              duration: 10 + Math.random() * 8,
+              repeat: Infinity,
+              delay: i * 1.5 + Math.random() * 3,
+              ease: "linear",
+            }}
+          />
+        ))}
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
