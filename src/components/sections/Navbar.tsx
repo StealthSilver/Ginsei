@@ -24,12 +24,20 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? "bg-[#0E0E0E]/95 backdrop-blur-sm border-b border-white" : "bg-[#0E0E0E]"
+      className={`fixed w-full z-50 transition-all duration-700 ease-in-out ${
+        isScrolled
+          ? "bg-[#0E0E0E]/95 backdrop-blur-sm pt-4"
+          : "bg-[#0E0E0E] pt-0"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div
+          className={`flex items-center justify-between py-3 px-4 transition-all duration-700 ease-in-out ${
+            isScrolled
+              ? "border border-[#9a9a9a] shadow-lg shadow-[#9a9a9a]/20"
+              : ""
+          }`}
+        >
           {/* Logo and Navigation - Left */}
           <div className="flex items-center gap-12">
             {/* Logo */}
