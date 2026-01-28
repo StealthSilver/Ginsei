@@ -4,10 +4,13 @@ import React from "react";
 
 const Approach = () => {
   return (
-    <section className="relative min-h-screen bg-[#0a0a0a] text-white py-24 px-6 lg:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="approach"
+      className="relative py-24 md:py-32 lg:py-40 bg-[#0E0E0E]"
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="text-sm tracking-[0.3em] uppercase text-gray-400 mb-20">
+        <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] mb-16 md:mb-24">
           Approach
         </h2>
 
@@ -16,35 +19,41 @@ const Approach = () => {
           {/* Left Side: Philosophy */}
           <div className="space-y-16">
             <div className="space-y-6">
-              <p className="text-4xl md:text-5xl lg:text-6xl leading-tight font-serif text-gray-100">
+              <p
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5]"
+                style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              >
                 Clarity comes before expression.
               </p>
-              <p className="text-4xl md:text-5xl lg:text-6xl leading-tight font-serif text-gray-100">
+              <p
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5]"
+                style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              >
                 Structure gives form its meaning.
               </p>
             </div>
 
             {/* Process Steps */}
             <div className="space-y-8 pt-8">
-              <h3 className="text-xs tracking-[0.3em] uppercase text-gray-500 mb-8">
+              <h3 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] mb-8">
                 Process
               </h3>
 
               <div className="space-y-6">
-                <div className="border-l border-gray-800 pl-6 transition-colors hover:border-gray-600">
-                  <p className="text-sm tracking-wide text-gray-300">
+                <div className="border-l border-[rgba(245,245,245,0.1)] pl-6 transition-colors hover:border-[rgba(245,245,245,0.3)]">
+                  <p className="text-base md:text-lg text-[rgba(245,245,245,0.6)]">
                     Research & Context
                   </p>
                 </div>
 
-                <div className="border-l border-gray-800 pl-6 transition-colors hover:border-gray-600">
-                  <p className="text-sm tracking-wide text-gray-300">
+                <div className="border-l border-[rgba(245,245,245,0.1)] pl-6 transition-colors hover:border-[rgba(245,245,245,0.3)]">
+                  <p className="text-base md:text-lg text-[rgba(245,245,245,0.6)]">
                     System Design
                   </p>
                 </div>
 
-                <div className="border-l border-gray-800 pl-6 transition-colors hover:border-gray-600">
-                  <p className="text-sm tracking-wide text-gray-300">
+                <div className="border-l border-[rgba(245,245,245,0.1)] pl-6 transition-colors hover:border-[rgba(245,245,245,0.3)]">
+                  <p className="text-base md:text-lg text-[rgba(245,245,245,0.6)]">
                     Precision Execution
                   </p>
                 </div>
