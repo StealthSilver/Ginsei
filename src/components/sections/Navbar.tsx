@@ -19,6 +19,11 @@ export default function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
+    // Don't prevent default for external routes like /careers
+    if (href.startsWith("/")) {
+      return;
+    }
+
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
@@ -32,6 +37,7 @@ export default function Navbar() {
     { href: "#work", label: "Work" },
     { href: "#services", label: "Services" },
     { href: "#approach", label: "Approach" },
+    { href: "/careers", label: "Careers" },
   ];
 
   return (
