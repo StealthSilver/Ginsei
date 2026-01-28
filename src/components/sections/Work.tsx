@@ -1,4 +1,32 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
 export default function Work() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   const projects = [
     {
       title: "Aurora Finance",
@@ -27,17 +55,29 @@ export default function Work() {
   ];
 
   return (
-    <section id="work" className="py-32 px-6">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+    <section id="work" className="py-32 px-6" ref={ref}>
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={staggerContainer}
+      >
+        <motion.h2
+          variants={fadeInUp}
+          className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+        >
           Featured Work
-        </h2>
-        <p className="text-xl text-gray-600 mb-16">
+        </motion.h2>
+        <motion.p variants={fadeInUp} className="text-xl text-gray-600 mb-16">
           A glimpse into our latest projects and the impact we've created.
-        </p>
-        <div className="space-y-24">
+        </motion.p>
+        <motion.div variants={staggerContainer} className="space-y-24">
           {projects.map((project, index) => (
-            <div key={index} className="group cursor-pointer">
+            <motion.div
+              key={index}
+              variants={fadeInUp}
+              className="group cursor-pointer"
+            >
               <div className="relative overflow-hidden rounded-2xl mb-6 aspect-video bg-gray-200">
                 <img
                   src={project.image}
@@ -71,10 +111,10 @@ export default function Work() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

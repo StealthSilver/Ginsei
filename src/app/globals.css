@@ -14,6 +14,7 @@
   /* Fonts */
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: "DM Serif Display", Georgia, serif;
+  --font-display: var(--font-playfair);
 }
 
 html,
@@ -24,6 +25,15 @@ body {
 body {
   background: var(--bg-dark);
   color: var(--text-primary);
+}
+
+/* Font utilities */
+.font-display {
+  font-family: var(--font-playfair), serif;
+}
+
+.perspective-1000 {
+  perspective: 1000px;
 }
 
 /* CREATIVE CURSOR (fine pointers only) */

@@ -1,4 +1,32 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+
 export default function Services() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.6, 0.05, 0.01, 0.9] as const },
+    },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+      },
+    },
+  };
+
   const services = [
     {
       title: "Brand Identity",
@@ -47,18 +75,30 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-32 px-6 bg-gray-50">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+    <section id="services" className="py-32 px-6 bg-gray-50" ref={ref}>
+      <motion.div
+        className="max-w-6xl mx-auto"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={staggerContainer}
+      >
+        <motion.h2
+          variants={fadeInUp}
+          className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+        >
           What We Do
-        </h2>
-        <p className="text-xl text-gray-600 mb-16">
+        </motion.h2>
+        <motion.p variants={fadeInUp} className="text-xl text-gray-600 mb-16">
           Comprehensive solutions tailored to your unique needs.
-        </p>
-        <div className="grid md:grid-cols-2 gap-12">
+        </motion.p>
+        <motion.div
+          variants={staggerContainer}
+          className="grid md:grid-cols-2 gap-12"
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
+              variants={fadeInUp}
               className="bg-white p-8 rounded-2xl hover:shadow-xl transition-shadow"
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -85,10 +125,10 @@ export default function Services() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
