@@ -34,7 +34,7 @@ export default function Navbar() {
         <div
           className={`flex items-center justify-between py-3 px-4 transition-all duration-700 ease-in-out ${
             isScrolled
-              ? "border border-[#9a9a9a] shadow-lg shadow-[#9a9a9a]/20"
+              ? "border border-[#9a9a9a]/30 shadow-lg shadow-[#9a9a9a]/10"
               : ""
           }`}
         >

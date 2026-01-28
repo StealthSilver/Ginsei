@@ -71,72 +71,6 @@ export default function CTA() {
 
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
-
-        {/* Snake-like animated dots following grid borders */}
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [
-              800, 880, 880, 960, 960, 1040, 1040, 1120, 1120, 1040, 1040, 960,
-              960, 880, 880, 800,
-            ],
-            y: [
-              160, 160, 240, 240, 320, 320, 400, 400, 320, 320, 240, 240, 160,
-              160, 160, 160,
-            ],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [
-              960, 1040, 1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040,
-              960, 960,
-            ],
-            y: [80, 80, 160, 160, 240, 240, 320, 320, 240, 240, 160, 160, 80],
-          }}
-          transition={{
-            duration: 13,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 4,
-          }}
-        />
-
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [
-              1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040, 960, 960,
-              1040,
-            ],
-            y: [240, 240, 320, 320, 400, 400, 480, 480, 400, 400, 320, 320],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 2,
-          }}
-        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
@@ -149,7 +83,7 @@ export default function CTA() {
           {/* Main heading - Letter by letter animation */}
           <div className="mb-12">
             <h2
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
               style={{ fontFamily: "var(--font-inter), sans-serif" }}
             >
               {text1.split("").map((letter, i) => (

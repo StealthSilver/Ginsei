@@ -29,106 +29,81 @@ export default function Services() {
 
   const services = [
     {
-      title: "Brand Identity",
+      number: "01",
+      title: "Brand Direction",
       description:
-        "Creating unique visual identities that capture your brand's essence and resonate with your audience.",
-      features: [
-        "Logo Design",
-        "Brand Guidelines",
-        "Visual Systems",
-        "Brand Strategy",
-      ],
+        "We define the structure behind brands — how they look, sound, and scale.",
     },
     {
-      title: "Web Design",
+      number: "02",
+      title: "Digital & Web Design",
       description:
-        "Designing beautiful, responsive websites that engage users and drive conversions.",
-      features: [
-        "UI/UX Design",
-        "Responsive Design",
-        "Prototyping",
-        "Design Systems",
-      ],
+        "Landing pages and websites designed with intent, clarity, and purpose.",
     },
     {
-      title: "Web Development",
+      number: "03",
+      title: "Full-Stack Development",
       description:
-        "Building fast, scalable, and secure websites using modern technologies and best practices.",
-      features: [
-        "Frontend Development",
-        "Backend Integration",
-        "CMS Solutions",
-        "Performance Optimization",
-      ],
-    },
-    {
-      title: "Digital Strategy",
-      description:
-        "Crafting comprehensive digital strategies that align with your business goals and drive growth.",
-      features: [
-        "Market Research",
-        "User Research",
-        "Content Strategy",
-        "Analytics & Insights",
-      ],
+        "Production-ready systems built for performance and longevity.",
     },
   ];
 
   return (
-    <section id="services" className="py-32 px-6 bg-gray-50" ref={ref}>
-      <motion.div
-        className="max-w-6xl mx-auto"
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        variants={staggerContainer}
-      >
-        <motion.h2
-          variants={fadeInUp}
-          className="text-5xl md:text-6xl font-bold text-gray-900 mb-4"
+    <section
+      id="services"
+      className="py-24 md:py-32 lg:py-40 bg-[#0E0E0E]"
+      ref={ref}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="flex items-baseline justify-between mb-16 md:mb-24"
         >
-          What We Do
-        </motion.h2>
-        <motion.p variants={fadeInUp} className="text-xl text-gray-600 mb-16">
-          Comprehensive solutions tailored to your unique needs.
-        </motion.p>
+          <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)]">
+            Services
+          </h2>
+        </motion.div>
+
+        {/* Services List */}
         <motion.div
           variants={staggerContainer}
-          className="grid md:grid-cols-2 gap-12"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="space-y-12 md:space-y-16"
         >
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              variants={fadeInUp}
-              className="bg-white p-8 rounded-2xl hover:shadow-xl transition-shadow"
-            >
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {service.description}
-              </p>
-              <ul className="space-y-2">
-                {service.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-center text-gray-700">
-                    <svg
-                      className="w-5 h-5 mr-3 text-gray-900"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+            <motion.div key={index} variants={fadeInUp} className="group">
+              <div className="border-t border-[rgba(245,245,245,0.1)] pt-8 md:pt-12">
+                <div className="grid md:grid-cols-12 gap-6 md:gap-12">
+                  {/* Number */}
+                  <div className="md:col-span-2">
+                    <span className="text-sm md:text-base font-mono text-[rgba(245,245,245,0.4)] tracking-wider">
+                      {service.number}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <div className="md:col-span-4">
+                    <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-[#F5F5F5] leading-tight">
+                      {service.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <div className="md:col-span-6">
+                    <p className="text-base md:text-lg text-[rgba(245,245,245,0.6)] leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

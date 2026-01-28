@@ -5,6 +5,7 @@ import Work from "@/components/sections/Work";
 import Services from "@/components/sections/Services";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
+import Approach from "@/components/sections/Approach";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
       <Philosophy />
       <Work />
       <Services />
+      <Approach />
       <CTA />
       <Footer />
     </div>

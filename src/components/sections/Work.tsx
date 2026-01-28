@@ -10,6 +10,7 @@ const projects = [
     category: "Web Design",
     year: "2025",
     image: "/sgrids.png",
+    url: "https://sgrids.vercel.app/",
   },
   {
     number: "02",
@@ -17,6 +18,7 @@ const projects = [
     category: "Product",
     year: "2026",
     image: "/verdan.png",
+    url: "https://verdan-main.vercel.app/",
   },
   {
     number: "03",
@@ -24,6 +26,7 @@ const projects = [
     category: "Product",
     year: "2025",
     image: "/meshspire.png",
+    url: "https://meshspire-landing.vercel.app/",
   },
   {
     number: "04",
@@ -31,6 +34,7 @@ const projects = [
     category: "Product",
     year: "2026",
     image: "/solx.png",
+    url: "https://sol-x-eta.vercel.app/",
   },
   {
     number: "05",
@@ -38,6 +42,7 @@ const projects = [
     category: "Web Design",
     year: "2025",
     image: "/alcaster.png",
+    url: "https://alcaster.vercel.app/",
   },
   {
     number: "06",
@@ -45,6 +50,7 @@ const projects = [
     category: "Product",
     year: "2025",
     image: "/infx.png",
+    url: "https://infinity-x-landing.vercel.app/",
   },
 ];
 
@@ -118,34 +124,41 @@ export default function Work() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group py-8 md:py-10 cursor-pointer"
+                className="group py-8 md:py-10"
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="grid grid-cols-12 items-center gap-4">
-                  {/* Number */}
-                  <span className="col-span-2 md:col-span-1 text-sm text-[rgba(154,154,154,1)] group-hover:text-[#F5F5F5] transition-colors duration-300">
-                    {project.number}
-                  </span>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer"
+                >
+                  <div className="grid grid-cols-12 items-center gap-4">
+                    {/* Number */}
+                    <span className="col-span-2 md:col-span-1 text-sm text-[rgba(154,154,154,1)] group-hover:text-[#F5F5F5] transition-colors duration-300">
+                      {project.number}
+                    </span>
 
-                  {/* Name */}
-                  <h3
-                    className="col-span-10 md:col-span-7 text-3xl sm:text-4xl md:text-5xl font-medium text-[#F5F5F5] tracking-tight group-hover:translate-x-2 transition-transform duration-300"
-                    style={{ fontFamily: "var(--font-inter), sans-serif" }}
-                  >
-                    {project.name}
-                  </h3>
+                    {/* Name */}
+                    <h3
+                      className="col-span-10 md:col-span-7 text-3xl sm:text-4xl md:text-5xl font-medium text-[#F5F5F5] tracking-tight group-hover:translate-x-2 transition-transform duration-300"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
+                      {project.name}
+                    </h3>
 
-                  {/* Category */}
-                  <span className="hidden md:block col-span-2 text-sm text-[rgba(154,154,154,1)]">
-                    {project.category}
-                  </span>
+                    {/* Category */}
+                    <span className="hidden md:block col-span-2 text-sm text-[rgba(154,154,154,1)]">
+                      {project.category}
+                    </span>
 
-                  {/* Year */}
-                  <span className="hidden md:block col-span-2 text-sm text-[rgba(154,154,154,1)] text-right">
-                    {project.year}
-                  </span>
-                </div>
+                    {/* Year */}
+                    <span className="hidden md:block col-span-2 text-sm text-[rgba(154,154,154,1)] text-right">
+                      {project.year}
+                    </span>
+                  </div>
+                </a>
               </motion.article>
             ))}
           </div>
