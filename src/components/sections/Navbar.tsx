@@ -15,6 +15,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setIsMenuOpen(false);
+    }
+  };
+
   const navLinks = [
     { href: "#philosophy", label: "Philosophy" },
     { href: "#work", label: "Work" },
@@ -58,6 +70,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className="inline-flex items-center px-2 py-2.5 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
                 >
                   {link.label}
@@ -70,6 +83,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="group inline-flex items-center gap-2 px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
             >
               Connect
@@ -128,7 +142,7 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={(e) => handleNavClick(e, link.href)}
               className="px-2 py-2 text-2xl font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
             >
               {link.label}
@@ -136,7 +150,7 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, "#contact")}
             className="mt-8 px-8 py-3 border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-lg font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
           >
             Connect

@@ -24,7 +24,7 @@ const Approach = () => {
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] mb-16 md:mb-24">
+        <h2 className="text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] mb-10 md:mb-14">
           Approach
         </h2>
 

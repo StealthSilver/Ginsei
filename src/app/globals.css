@@ -17,6 +17,10 @@
   --font-display: var(--font-playfair);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
