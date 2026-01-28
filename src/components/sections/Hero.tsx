@@ -3,6 +3,22 @@
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  const text1 = "Crafting Digital";
+  const text2 = "Excellence";
+
+  const letterAnimation = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        delay: i * 0.05,
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
+      },
+    }),
+  };
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -10,6 +26,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.6,
+        delay: text1.length * 0.05 + text2.length * 0.05 + 0.3,
         ease: [0.6, 0.05, 0.01, 0.9] as const,
       },
     },
@@ -27,7 +44,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex items-center px-6 lg:px-20 bg-[#0E0E0E] overflow-hidden">
+    <section className="relative h-screen flex items-center px-6 lg:px-8 bg-[#0E0E0E] overflow-hidden">
       {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -60,16 +77,41 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        {/* Main heading - Clean & Modern */}
-        <motion.h1
-          variants={fadeInUp}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] mb-6 tracking-tight"
-          style={{ fontFamily: "var(--font-inter), sans-serif" }}
-        >
-          Crafting Digital
-          <br />
-          <span className="text-[rgba(245,245,245,0.5)]">Excellence</span>
-        </motion.h1>
+        {/* Main heading - Letter by letter animation */}
+        <div className="mb-6">
+          <h1
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
+            style={{ fontFamily: "var(--font-inter), sans-serif" }}
+          >
+            {text1.split("").map((letter, i) => (
+              <motion.span
+                key={i}
+                custom={i}
+                variants={letterAnimation}
+                initial="hidden"
+                animate="visible"
+                className="inline-block"
+              >
+                {letter === " " ? "\u00A0" : letter}
+              </motion.span>
+            ))}
+            <br />
+            <span className="text-[rgba(245,245,245,0.5)]">
+              {text2.split("").map((letter, i) => (
+                <motion.span
+                  key={i}
+                  custom={i + text1.length}
+                  variants={letterAnimation}
+                  initial="hidden"
+                  animate="visible"
+                  className="inline-block"
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </motion.span>
+              ))}
+            </span>
+          </h1>
+        </div>
 
         {/* Description */}
         <motion.p
@@ -81,50 +123,14 @@ export default function Hero() {
           transform digital landscapes.
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.div variants={fadeInUp} className="flex gap-4">
+        {/* CTA Button - Same as Navbar */}
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
           <a
             href="#contact"
-            className="group relative px-6 py-3 text-sm font-medium text-white overflow-hidden rounded-full"
+            className="inline-flex items-center px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
           >
-            <span className="absolute inset-0 bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/15" />
-            <span className="relative flex items-center gap-2">
-              Get Started
-              <svg
-                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </span>
+            Connect
           </a>
-        </motion.div>
-
-        {/* Stats or features - subtle */}
-        <motion.div
-          variants={fadeInUp}
-          className="mt-20 flex gap-12 text-sm"
-          style={{ fontFamily: "var(--font-inter), sans-serif" }}
-        >
-          <div>
-            <div className="text-2xl font-semibold text-white mb-1">50+</div>
-            <div className="text-[rgba(245,245,245,0.4)]">Projects</div>
-          </div>
-          <div>
-            <div className="text-2xl font-semibold text-white mb-1">5+</div>
-            <div className="text-[rgba(245,245,245,0.4)]">Years</div>
-          </div>
-          <div>
-            <div className="text-2xl font-semibold text-white mb-1">100%</div>
-            <div className="text-[rgba(245,245,245,0.4)]">Satisfaction</div>
-          </div>
         </motion.div>
       </motion.div>
 
@@ -133,7 +139,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-12 left-6 lg:left-20 flex items-center gap-3 text-xs text-[rgba(245,245,245,0.3)]"
+        className="absolute bottom-12 left-6 lg:left-8 flex items-center gap-3 text-xs text-[rgba(245,245,245,0.3)]"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
