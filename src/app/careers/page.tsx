@@ -135,7 +135,10 @@ export default function Careers() {
                 animate={isInView ? "visible" : "hidden"}
                 className="mb-8"
               >
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-display font-light text-[#F5F5F5] leading-[1.1] tracking-tight">
+                <h1
+                  className="text-6xl md:text-7xl lg:text-8xl font-medium text-[#F5F5F5] leading-[1.1] tracking-tight"
+                  style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                >
                   <div className="inline-block">
                     {text1.split("").map((char, index) => (
                       <motion.span
@@ -177,13 +180,19 @@ export default function Careers() {
                 animate={isInView ? "visible" : "hidden"}
                 className="max-w-3xl mx-auto mb-12"
               >
-                <p className="text-xl md:text-2xl text-[#9a9a9a] leading-relaxed mb-8">
+                <p
+                  className="text-xl md:text-2xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-8 font-light"
+                  style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                >
                   At Ginsei, we don't just create digital products — we craft
                   experiences that resonate and endure. We're a collective of
                   designers and developers who believe in the power of
                   thoughtful design and elegant code.
                 </p>
-                <p className="text-lg md:text-xl text-[#9a9a9a] leading-relaxed mb-8">
+                <p
+                  className="text-lg md:text-xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-8 font-light"
+                  style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                >
                   We're looking for passionate individuals who share our vision
                   of excellence. Whether you're a designer who thinks in systems
                   or a developer who appreciates beautiful interfaces, you'll
@@ -191,10 +200,16 @@ export default function Careers() {
                 </p>
                 <div className="grid md:grid-cols-3 gap-8 mt-12 mb-12">
                   <div className="text-center">
-                    <h3 className="text-2xl font-display text-[#F5F5F5] mb-3">
+                    <h3
+                      className="text-2xl font-medium text-[#F5F5F5] mb-3"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Creative Freedom
                     </h3>
-                    <p className="text-[#9a9a9a]">
+                    <p
+                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Push boundaries and explore new ideas without constraints
                     </p>
                   </div>
@@ -202,7 +217,10 @@ export default function Careers() {
                     <h3 className="text-2xl font-display text-[#F5F5F5] mb-3">
                       Learning Culture
                     </h3>
-                    <p className="text-[#9a9a9a]">
+                    <p
+                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Grow alongside talented peers in a supportive environment
                     </p>
                   </div>
@@ -210,7 +228,10 @@ export default function Careers() {
                     <h3 className="text-2xl font-display text-[#F5F5F5] mb-3">
                       Impact Projects
                     </h3>
-                    <p className="text-[#9a9a9a]">
+                    <p
+                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Work on meaningful projects that make a difference
                     </p>
                   </div>
@@ -294,10 +315,16 @@ export default function Careers() {
 
                   {/* Modal Content */}
                   <div className="p-8 md:p-12">
-                    <h2 className="text-3xl md:text-4xl font-display text-[#F5F5F5] mb-2">
+                    <h2
+                      className="text-3xl md:text-4xl font-medium text-[#F5F5F5] mb-2"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Apply to Ginsei
                     </h2>
-                    <p className="text-[#9a9a9a] mb-8">
+                    <p
+                      className="text-[rgba(245,245,245,0.5)] mb-8 font-light"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Fill in your details and we'll get back to you soon.
                     </p>
 
@@ -306,7 +333,10 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="fullName"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           Full Name <span className="text-red-500">*</span>
                         </label>
@@ -317,7 +347,10 @@ export default function Careers() {
                           value={formData.fullName}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[#9a9a9a] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                           placeholder="John Doe"
                         />
                       </div>
@@ -326,7 +359,10 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           Email <span className="text-red-500">*</span>
                         </label>
@@ -337,7 +373,10 @@ export default function Careers() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[#9a9a9a] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                           placeholder="john@example.com"
                         />
                       </div>
@@ -346,7 +385,10 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="collegeName"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           College Name <span className="text-red-500">*</span>
                         </label>
@@ -357,7 +399,10 @@ export default function Careers() {
                           value={formData.collegeName}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[#9a9a9a] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                           placeholder="Your College or University"
                         />
                       </div>
@@ -366,7 +411,10 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="role"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           Role <span className="text-red-500">*</span>
                         </label>
@@ -377,6 +425,9 @@ export default function Careers() {
                           onChange={handleInputChange}
                           required
                           className="w-full px-4 py-3 bg-[#0E0E0E] border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           <option value="" disabled>
                             Select a role
@@ -390,7 +441,10 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="resume"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           Upload Resume <span className="text-red-500">*</span>
                         </label>
@@ -402,11 +456,19 @@ export default function Careers() {
                             onChange={handleFileChange}
                             required
                             accept=".pdf,.doc,.docx"
-                            className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-medium file:bg-[#F5F5F5] file:text-[#0E0E0E] hover:file:bg-[#e5e5e5] file:cursor-pointer cursor-pointer focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                            className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:bg-[#F5F5F5] file:text-[#0E0E0E] hover:file:bg-[#e5e5e5] file:cursor-pointer cursor-pointer focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                            style={{
+                              fontFamily: "var(--font-inter), sans-serif",
+                            }}
                           />
                         </div>
                         {formData.resume && (
-                          <p className="text-sm text-[#9a9a9a] mt-2">
+                          <p
+                            className="text-sm text-[rgba(245,245,245,0.5)] mt-2 font-light"
+                            style={{
+                              fontFamily: "var(--font-inter), sans-serif",
+                            }}
+                          >
                             Selected: {formData.resume.name}
                           </p>
                         )}
@@ -416,10 +478,18 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="importantLinks"
-                          className="block text-sm font-medium text-[#F5F5F5] mb-2"
+                          className="block text-sm text-[#F5F5F5] mb-2"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                         >
                           Important Links
-                          <span className="text-[#9a9a9a] text-xs ml-2">
+                          <span
+                            className="text-[rgba(245,245,245,0.4)] text-xs ml-2 font-light"
+                            style={{
+                              fontFamily: "var(--font-inter), sans-serif",
+                            }}
+                          >
                             (Optional)
                           </span>
                         </label>
@@ -429,7 +499,10 @@ export default function Careers() {
                           value={formData.importantLinks}
                           onChange={handleInputChange}
                           rows={3}
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[#9a9a9a] focus:outline-none focus:border-[#F5F5F5] transition-colors resize-none"
+                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors resize-none"
+                          style={{
+                            fontFamily: "var(--font-inter), sans-serif",
+                          }}
                           placeholder="Portfolio, GitHub, LinkedIn, etc."
                         />
                       </div>
