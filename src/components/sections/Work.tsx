@@ -56,13 +56,10 @@ export default function Work() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-    }
+    setMousePos({
+      x: e.clientX,
+      y: e.clientY,
+    });
   };
 
   return (
@@ -93,10 +90,10 @@ export default function Work() {
         >
           {/* Hover Image Preview */}
           <motion.div
-            className="fixed pointer-events-none z-40 w-64 md:w-80 aspect-[4/5] overflow-hidden"
+            className="fixed pointer-events-none z-40 w-[480px] md:w-[560px] aspect-[16/9] overflow-hidden rounded-lg shadow-2xl"
             style={{
-              left: mousePos.x - 160,
-              top: mousePos.y - 200,
+              left: mousePos.x + 20,
+              top: mousePos.y - 150,
             }}
             animate={{
               opacity: hoveredIndex !== null ? 1 : 0,
@@ -108,7 +105,7 @@ export default function Work() {
               <img
                 src={projects[hoveredIndex].image}
                 alt={projects[hoveredIndex].name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain bg-[#0E0E0E]"
               />
             )}
           </motion.div>
