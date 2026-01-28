@@ -1,29 +1,41 @@
+import Image from "next/image";
+
 export default function Hero() {
   return (
-    <section className="min-h-screen flex items-center justify-center pt-20 px-6">
-      <div className="max-w-6xl mx-auto text-center">
-        <h1 className="text-6xl md:text-8xl font-bold text-gray-900 mb-6">
-          Crafting Digital
-          <br />
-          <span className="text-gray-400">Experiences</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          We transform visions into stunning digital realities through
-          thoughtful design and innovative solutions.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#work"
-            className="px-8 py-4 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors text-lg"
-          >
-            View Our Work
-          </a>
-          <a
-            href="#services"
-            className="px-8 py-4 border-2 border-gray-900 text-gray-900 rounded-full hover:bg-gray-900 hover:text-white transition-colors text-lg"
-          >
-            Our Services
-          </a>
+    <section className="relative pt-24 pb-24 px-6 lg:px-8 bg-[#0E0E0E]">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
+        {/* Left — Copy */}
+        <div className="w-full lg:w-1/2 flex flex-col gap-6">
+          <p className="text-sm tracking-[0.18em] uppercase text-(--text-secondary)">
+            Hero
+          </p>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl leading-tight font-medium text-[#F5F5F5]">
+            Design that works,
+            <br />
+            beautifully.
+          </h1>
+          <p className="text-base sm:text-lg text-(--text-secondary) max-w-xl">
+            Gensei is a design agency focused on systems, identity, and digital
+            products.
+          </p>
+          <div className="mt-4 flex items-center gap-3 text-sm text-(--text-secondary)">
+            <span className="inline-block w-8 h-px bg-[rgba(245,245,245,0.35)]" />
+            <span>- Scroll to explore</span>
+          </div>
+        </div>
+
+        {/* Right — Image */}
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-md aspect-4/5 overflow-hidden bg-[#151515]">
+            <Image
+              src="/hero.jpg"
+              alt="Selected Gensei work"
+              fill
+              sizes="(min-width: 1024px) 420px, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
         </div>
       </div>
     </section>
