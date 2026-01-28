@@ -9,40 +9,42 @@ const projects = [
     name: "Smart Grid Analytics",
     category: "Web Design",
     year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    image: "/sgrids.png",
   },
   {
     number: "02",
     name: "Verdan",
     category: "Product",
     year: "2026",
-    image:
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80",
+    image: "/verdan.png",
   },
   {
     number: "03",
     name: "MeshSpire",
     category: "Product",
     year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: "/meshspire.png",
   },
   {
     number: "04",
     name: "Sol-X",
     category: "Product",
     year: "2026",
-    image:
-      "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?w=800&q=80",
+    image: "/solx.png",
   },
   {
     number: "05",
+    name: "Alcaster",
+    category: "Web Design",
+    year: "2025",
+    image: "/alcaster.png",
+  },
+  {
+    number: "06",
     name: "Infinity-X",
     category: "Product",
     year: "2025",
-    image:
-      "https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=80",
+    image: "/infx.png",
   },
 ];
 
