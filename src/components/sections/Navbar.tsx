@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Navbar() {
@@ -31,28 +31,26 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo and Navigation - Left */}
-          <div className="flex items-baseline gap-12">
+          <div className="flex items-center gap-12">
             {/* Logo */}
-            <a
-              href="#"
-              className="shrink-0 flex items-baseline leading-none focus:outline-none  focus:ring-offset-2 focus:ring-offset-[#0E0E0E] rounded-sm"
-            >
+            <a href="#" className="shrink-0 flex items-center rounded-sm">
               <Image
                 src="/ginseil.svg"
                 alt="Ginseil Logo"
                 width={140}
                 height={36}
-                className="h-9 w-auto"
+                className="block h-9 w-auto"
+                priority
               />
             </a>
 
             {/* Navigation Links (Desktop) */}
-            <div className="hidden md:flex items-baseline gap-6">
+            <div className="hidden md:flex items-center gap-6">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="inline-flex items-baseline px-2 py-0 text-[15px] font-normal text-[color:var(--text-secondary)] cursor-pointer hover:text-[color:var(--text-primary)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6e7eff] focus:ring-offset-2 focus:ring-offset-[#0E0E0E] rounded-sm"
+                  className="inline-flex items-center px-2 py-2 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
                 >
                   {link.label}
                 </a>
@@ -64,7 +62,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <a
               href="#contact"
-              className="px-6 py-2.5 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-[15px] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6e7eff] focus:ring-offset-2 focus:ring-offset-[#0E0E0E]"
+              className="px-6 py-2.5 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-[15px] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
             >
               Connect
             </a>
@@ -73,7 +71,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none focus:ring-2 focus:ring-[#6e7eff] focus:ring-offset-2 focus:ring-offset-[#0E0E0E] rounded-sm"
+            className="md:hidden flex flex-col gap-1.5 p-2 rounded-sm"
             aria-label="Toggle menu"
             aria-expanded={isMenuOpen}
           >
@@ -110,7 +108,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="px-2 py-2 text-2xl font-normal text-[color:var(--text-secondary)] cursor-pointer hover:text-[color:var(--text-primary)] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#6e7eff] rounded-sm"
+              className="px-2 py-2 text-2xl font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
             >
               {link.label}
             </a>
@@ -118,7 +116,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setIsMenuOpen(false)}
-            className="mt-8 px-8 py-3 border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-lg font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#6e7eff]"
+            className="mt-8 px-8 py-3 border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-lg font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
           >
             Connect
           </a>
