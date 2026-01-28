@@ -44,7 +44,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative h-screen flex items-center px-6 lg:px-8 bg-[#0E0E0E] overflow-hidden">
+    <section className="relative h-screen flex items-center bg-[#0E0E0E] overflow-hidden">
       {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -64,43 +64,30 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
       </div>
 
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="max-w-6xl relative z-10"
-      >
-        {/* Small label */}
-        <motion.div variants={fadeInUp} className="mb-8">
-          <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
-            Design Studio
-          </span>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="relative z-10"
+        >
+          {/* Small label */}
+          <motion.div variants={fadeInUp} className="mb-8">
+            <span className="inline-block px-3 py-1.5 text-xs tracking-[0.2em] uppercase text-[rgba(245,245,245,0.4)] border border-white/10 rounded-full">
+              Design Studio
+            </span>
+          </motion.div>
 
-        {/* Main heading - Letter by letter animation */}
-        <div className="mb-6">
-          <h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
-            style={{ fontFamily: "var(--font-inter), sans-serif" }}
-          >
-            {text1.split("").map((letter, i) => (
-              <motion.span
-                key={i}
-                custom={i}
-                variants={letterAnimation}
-                initial="hidden"
-                animate="visible"
-                className="inline-block"
-              >
-                {letter === " " ? "\u00A0" : letter}
-              </motion.span>
-            ))}
-            <br />
-            <span className="text-[rgba(245,245,245,0.5)]">
-              {text2.split("").map((letter, i) => (
+          {/* Main heading - Letter by letter animation */}
+          <div className="mb-6">
+            <h1
+              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
+              style={{ fontFamily: "var(--font-inter), sans-serif" }}
+            >
+              {text1.split("").map((letter, i) => (
                 <motion.span
                   key={i}
-                  custom={i + text1.length}
+                  custom={i}
                   variants={letterAnimation}
                   initial="hidden"
                   animate="visible"
@@ -109,45 +96,58 @@ export default function Hero() {
                   {letter === " " ? "\u00A0" : letter}
                 </motion.span>
               ))}
-            </span>
-          </h1>
-        </div>
+              <br />
+              <span className="text-[rgba(245,245,245,0.5)]">
+                {text2.split("").map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i + text1.length}
+                    variants={letterAnimation}
+                    initial="hidden"
+                    animate="visible"
+                    className="inline-block"
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </motion.span>
+                ))}
+              </span>
+            </h1>
+          </div>
 
-        {/* Description */}
-        <motion.p
-          variants={fadeInUp}
-          className="text-base sm:text-lg md:text-xl text-[rgba(245,245,245,0.5)] max-w-xl mb-12 leading-relaxed font-light"
-          style={{ fontFamily: "var(--font-inter), sans-serif" }}
-        >
-          Where art meets technology, creating experiences that inspire and
-          transform digital landscapes.
-        </motion.p>
-
-        {/* CTA Button - Same as Navbar */}
-        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
-          <a
-            href="#contact"
-            className="inline-flex items-center px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+          {/* Description */}
+          <motion.p
+            variants={fadeInUp}
+            className="text-base sm:text-lg md:text-xl text-[rgba(245,245,245,0.5)] max-w-xl mb-12 leading-relaxed font-light"
+            style={{ fontFamily: "var(--font-inter), sans-serif" }}
           >
-            Connect
-          </a>
-        </motion.div>
-      </motion.div>
+            Where art meets technology, creating experiences that inspire and
+            transform digital landscapes.
+          </motion.p>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-12 left-6 lg:left-8 flex items-center gap-3 text-xs text-[rgba(245,245,245,0.3)]"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[1px] h-12 bg-gradient-to-b from-[rgba(245,245,245,0.3)] to-transparent"
-        />
-        <span className="tracking-[0.15em] uppercase">Scroll</span>
-      </motion.div>
+          {/* CTA Button - Same as Navbar */}
+          <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-2 px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+            >
+              Connect
+              <svg
+                className="w-4 h-4 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

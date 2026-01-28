@@ -8,7 +8,13 @@ import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      {/* Left vertical line */}
+      <div className="fixed top-0 bottom-0 w-px bg-white/10 left-50 z-[100]" />
+
+      {/* Right vertical line */}
+      <div className="fixed top-0 bottom-0 w-px bg-white/10 right-50 z-[100]" />
+
       <Navbar />
       <Hero />
       <Philosophy />
