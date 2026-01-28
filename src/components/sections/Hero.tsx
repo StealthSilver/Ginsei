@@ -6,6 +6,17 @@ export default function Hero() {
   const text1 = "Crafting Digital";
   const text2 = "Excellence";
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const letterAnimation = {
     hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
@@ -235,6 +246,7 @@ export default function Hero() {
           <motion.div variants={fadeInUp} initial="hidden" animate="visible">
             <a
               href="#contact"
+              onClick={(e) => handleNavClick(e, "#contact")}
               className="group inline-flex items-center gap-2 px-8 py-3.5 text-[16px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
             >
               Connect
