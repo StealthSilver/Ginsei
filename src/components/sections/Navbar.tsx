@@ -26,12 +26,12 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled ? "bg-[#0E0E0E]/95 backdrop-blur-sm" : "bg-[#0E0E0E]"
-      } border-b border-[rgba(245,245,245,0.1)]`}
+      }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo and Navigation - Left */}
-          <div className="flex items-end gap-12">
+          <div className="flex items-center gap-12">
             {/* Logo */}
             <a href="#" className="shrink-0 flex items-center rounded-sm">
               <Image
@@ -50,7 +50,7 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="inline-flex items-center px-2 py-2 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
+                  className="inline-flex items-center px-2 py-2.5 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
                 >
                   {link.label}
                 </a>
@@ -62,7 +62,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <a
               href="#contact"
-              className="px-6 py-2.5 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] text-[15px] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+              className="inline-flex items-center px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
             >
               Connect
             </a>
