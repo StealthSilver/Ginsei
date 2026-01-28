@@ -63,47 +63,74 @@ export default function Hero() {
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
-        {/* Animated grid lines - Horizontal */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`h-${i}`}
-            className="absolute h-[1px] w-[160px] bg-gradient-to-r from-transparent via-[#9a9a9a] to-transparent"
-            style={{
-              top: `${15 + i * 15}%`,
-              left: 0,
-            }}
-            animate={{
-              x: ["0%", "100vw"],
-            }}
-            transition={{
-              duration: 8 + Math.random() * 6,
-              repeat: Infinity,
-              delay: i * 1.2 + Math.random() * 2,
-              ease: "linear",
-            }}
-          />
-        ))}
+        {/* Snake-like animated dots following grid borders */}
+        {/* Dot 1 - Complex path following grid edges */}
+        <motion.div
+          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          style={{
+            background: "#9a9a9a",
+            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+          }}
+          animate={{
+            x: [
+              800, 880, 880, 960, 960, 1040, 1040, 1120, 1120, 1040, 1040, 960,
+              960, 880, 880, 800,
+            ],
+            y: [
+              160, 160, 240, 240, 320, 320, 400, 400, 320, 320, 240, 240, 160,
+              160, 160, 160,
+            ],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
 
-        {/* Animated grid lines - Vertical */}
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={`v-${i}`}
-            className="absolute w-[1px] h-[160px] bg-gradient-to-b from-transparent via-[#9a9a9a] to-transparent"
-            style={{
-              left: `${10 + i * 15}%`,
-              top: 0,
-            }}
-            animate={{
-              y: ["0%", "100vh"],
-            }}
-            transition={{
-              duration: 10 + Math.random() * 8,
-              repeat: Infinity,
-              delay: i * 1.5 + Math.random() * 3,
-              ease: "linear",
-            }}
-          />
-        ))}
+        {/* Dot 2 - Different path following grid edges */}
+        <motion.div
+          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          style={{
+            background: "#9a9a9a",
+            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+          }}
+          animate={{
+            x: [
+              960, 1040, 1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040,
+              960, 960,
+            ],
+            y: [80, 80, 160, 160, 240, 240, 320, 320, 240, 240, 160, 160, 80],
+          }}
+          transition={{
+            duration: 16,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 5,
+          }}
+        />
+
+        {/* Dot 3 - Another path following grid edges */}
+        <motion.div
+          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          style={{
+            background: "#9a9a9a",
+            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+          }}
+          animate={{
+            x: [
+              1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040, 960, 960,
+              1040,
+            ],
+            y: [240, 240, 320, 320, 400, 400, 480, 480, 400, 400, 320, 320],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "linear",
+            delay: 3,
+          }}
+        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
