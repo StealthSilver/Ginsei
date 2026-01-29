@@ -7,7 +7,6 @@ export default function Hero() {
   const text1 = "Crafting Digital";
   const text2 = "Excellence";
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [rotationAngle, setRotationAngle] = useState(0);
 
   // Progressive animation configuration
   const offset = 100; // Shift right by 100px
@@ -125,7 +124,7 @@ export default function Hero() {
   const LINE_DURATION = 0.15; // Each line takes 0.15s to appear
   const FACES_START_TIME = 7.3; // Face fills start
   const FACES_DURATION = 2; // Faces take 2s to fully fill
-  const ROTATION_START_TIME = 9.5; // Rotation starts after faces are filled
+  const COLOR_SHIFT_START_TIME = 9.5; // Color shifting starts after faces are filled
 
   // Define all line pairs that connect the dots
   const linePairs = [
@@ -183,32 +182,20 @@ export default function Hero() {
         Math.min(1, (elapsed - FACES_START_TIME) / FACES_DURATION),
       );
 
-      // Calculate rotation angle (starts after faces are filled)
-      let currentRotationAngle = 0;
-      if (elapsed >= ROTATION_START_TIME) {
-        currentRotationAngle = (elapsed - ROTATION_START_TIME) * 0.3; // Slow rotation
-        setRotationAngle(currentRotationAngle);
-      }
+      // Calculate color shift timing (starts after faces are filled)
+      const colorShiftProgress =
+        elapsed >= COLOR_SHIFT_START_TIME
+          ? elapsed - COLOR_SHIFT_START_TIME
+          : 0;
 
-      // Calculate center point for rotation and gradient origin
+      // Calculate center point for gradient origin
       const centerX =
         positions.reduce((sum, p) => sum + p.x, 0) / positions.length;
       const centerY =
         positions.reduce((sum, p) => sum + p.y, 0) / positions.length;
 
-      // Apply 3D rotation around Y-axis (vertical axis) to positions if rotation has started
-      const rotatedPositions = positions.map((pos) => {
-        if (currentRotationAngle === 0) return pos;
-
-        const dx = pos.x - centerX;
-        const dy = pos.y - centerY;
-
-        // 3D rotation around Y-axis: scale X coordinate based on cosine for perspective
-        return {
-          x: centerX + dx * Math.cos(currentRotationAngle),
-          y: pos.y, // Y stays the same for vertical axis rotation
-        };
-      });
+      // No rotation - use positions as-is
+      const rotatedPositions = positions;
 
       // Draw filled triangular faces with 3D shading effect (only after lines are drawn)
       if (facesProgress > 0) {
@@ -231,11 +218,17 @@ export default function Hero() {
           // Simulate 3D depth based on position
           const zDepth = Math.sin(elapsed + idx * 0.5) * 0.5 + 0.5;
 
-          // Metallic gray shading with 3D effect
-          // Use lightness values to create metallic appearance
-          const baseLightness = 50 + zDepth * 25; // Range: 50-75 for highlights
-          const midLightness = 35 + zDepth * 15; // Range: 35-50 for mid-tones
-          const darkLightness = 20 + zDepth * 10; // Range: 20-30 for shadows
+          // Grey gradient shifting animation - gradually shift lightness for dynamic effect
+          // Each triangle gets a slightly different phase for varied grey intensity
+          const colorPhase = colorShiftProgress * 0.5 + idx * 0.8;
+
+          // Animate lightness values to create shifting grey tones (saturation = 0 for pure grey)
+          const lightnessWave = Math.sin(colorPhase) * 15; // Oscillates between -15 and +15
+
+          // Varying grey lightness values with animation
+          const baseLightness = 55 + zDepth * 20 + lightnessWave; // Range: ~40-90% (bright highlights)
+          const midLightness = 40 + zDepth * 12 + lightnessWave * 0.7; // Range: ~30-65% (mid-tones)
+          const darkLightness = 25 + zDepth * 10 + lightnessWave * 0.5; // Range: ~15-45% (shadows)
 
           // Create radial gradient for 3D metallic effect
           const gradientRadius = Math.max(
@@ -253,17 +246,17 @@ export default function Hero() {
           );
 
           // Animated fill opacity with progressive reveal
-          const baseOpacity = facesProgress * 0.3;
-          const midOpacity = facesProgress * 0.2;
-          const edgeOpacity = facesProgress * 0.15;
+          const baseOpacity = facesProgress * 0.35;
+          const midOpacity = facesProgress * 0.25;
+          const edgeOpacity = facesProgress * 0.2;
 
-          // Metallic gradient: bright center (reflection), mid-tone, dark edges (shadow)
+          // Grey gradient: shifting lightness values for dynamic grey tones (saturation = 0)
           gradient.addColorStop(
             0,
             `hsla(0, 0%, ${baseLightness}%, ${baseOpacity})`,
           );
           gradient.addColorStop(
-            0.4,
+            0.5,
             `hsla(0, 0%, ${midLightness}%, ${midOpacity})`,
           );
           gradient.addColorStop(
@@ -280,8 +273,8 @@ export default function Hero() {
           ctx.closePath();
           ctx.fill();
 
-          // Draw glowing edges with gray gradient for metallic effect
-          ctx.strokeStyle = `hsla(0, 0%, ${baseLightness + 15}%, ${facesProgress * 0.4})`;
+          // Draw glowing edges with shifting grey tones
+          ctx.strokeStyle = `hsla(0, 0%, ${baseLightness + 15}%, ${facesProgress * 0.45})`;
           ctx.lineWidth = 1.5;
           ctx.stroke();
         });
@@ -372,22 +365,8 @@ export default function Hero() {
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
-        {/* Rotating container for dots */}
-        <motion.div
-          className="absolute inset-0"
-          style={{
-            transformOrigin: `${centerX}px ${centerY}px`,
-            perspective: "1000px",
-            transformStyle: "preserve-3d",
-          }}
-          animate={{
-            rotateY: rotationAngle * (180 / Math.PI), // Convert radians to degrees for Y-axis rotation
-          }}
-          transition={{
-            duration: 0,
-            ease: "linear",
-          }}
-        >
+        {/* Container for dots - no rotation */}
+        <div className="absolute inset-0">
           {/* Progressive animated dots - vertices of the 3D shape */}
           {dots.map((dot, index) => (
             <motion.div
@@ -425,7 +404,7 @@ export default function Hero() {
               }}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
