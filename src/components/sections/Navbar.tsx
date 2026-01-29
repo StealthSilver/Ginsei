@@ -13,7 +13,14 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
-      // Close mobile menu when scrolling
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close mobile menu when scrolling
+  useEffect(() => {
+    const handleScroll = () => {
       if (isMenuOpen) {
         setIsMenuOpen(false);
       }
@@ -189,7 +196,9 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`md:hidden fixed inset-0 top-20 bg-[#0E0E0E] transition-all duration-300 ${
+        className={`md:hidden fixed inset-x-0 bottom-0 bg-[#0E0E0E] transition-all duration-300 ${
+          isScrolled ? "top-[76px]" : "top-[56px]"
+        } ${
           isMenuOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
