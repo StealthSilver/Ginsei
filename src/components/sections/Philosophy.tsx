@@ -10,7 +10,8 @@ export default function Philosophy() {
 
   const line1 = "Form gives shape to intention.";
   const line2 = "Function gives it purpose.";
-  const line3 = "We design systems where\nclarity and beauty coexist.";
+  const line3a = "We design systems where ";
+  const line3b = "clarity and beauty coexist.";
 
   const letterAnimation = {
     hidden: { opacity: 0, y: 20 },
@@ -122,10 +123,23 @@ export default function Philosophy() {
               ))}
               <br />
               <span className="text-[rgba(245,245,245,0.6)]">
-                {line3.split("").map((letter, i) => (
+                {line3a.split("").map((letter, i) => (
                   <motion.span
                     key={i}
                     custom={i + line1.length + line2.length}
+                    variants={letterAnimation}
+                    initial="hidden"
+                    animate={isInView ? "visible" : "hidden"}
+                    className="inline-block"
+                  >
+                    {letter === " " ? "\u00A0" : letter}
+                  </motion.span>
+                ))}
+                <br className="sm:hidden" />
+                {line3b.split("").map((letter, i) => (
+                  <motion.span
+                    key={i}
+                    custom={i + line1.length + line2.length + line3a.length}
                     variants={letterAnimation}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
