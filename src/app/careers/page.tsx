@@ -143,7 +143,7 @@ export default function Careers() {
       <Navbar />
       <main className="bg-[#0E0E0E]">
         <section
-          className="relative min-h-screen flex items-center bg-[#0E0E0E] overflow-hidden py-32 pt-40"
+          className="relative min-h-screen flex items-center bg-[#0E0E0E] overflow-hidden py-20 sm:py-32 pt-24 sm:pt-40"
           ref={ref}
         >
           {/* Subtle animated background elements */}
@@ -152,29 +152,29 @@ export default function Careers() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.015 }}
               transition={{ duration: 2, ease: "easeOut" }}
-              className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-white rounded-full blur-[120px]"
+              className="absolute top-1/4 left-1/4 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-white rounded-full blur-[80px] sm:blur-[100px] md:blur-[120px]"
             />
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.01 }}
               transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
-              className="absolute bottom-1/3 left-1/2 w-[400px] h-[400px] bg-white rounded-full blur-[100px]"
+              className="absolute bottom-1/3 left-1/2 w-[250px] sm:w-[350px] md:w-[400px] h-[250px] sm:h-[350px] md:h-[400px] bg-white rounded-full blur-[80px] sm:blur-[100px]"
             />
 
-            {/* Subtle grid lines */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
+            {/* Subtle grid lines - hidden on mobile */}
+            <div className="hidden md:block absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
           </div>
 
-          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full">
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-5xl mx-auto text-center">
               {/* Main Heading */}
               <motion.div
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="mb-8"
+                className="mb-6 sm:mb-8"
               >
                 <h1
-                  className="text-6xl md:text-7xl lg:text-8xl font-medium text-[#F5F5F5] leading-[1.1] tracking-tight"
+                  className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-medium text-[#F5F5F5] leading-[1.1] tracking-tight px-4 sm:px-0"
                   style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
                   <div>
@@ -215,48 +215,48 @@ export default function Careers() {
                 variants={fadeInUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="max-w-3xl mx-auto mb-12"
+                className="max-w-3xl mx-auto mb-8 sm:mb-12 px-4 sm:px-0"
               >
                 <p
-                  className="text-xl md:text-2xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-8 font-light"
+                  className="text-base sm:text-lg md:text-2xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-6 sm:mb-8 font-light"
                   style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
                   We craft experiences that resonate and endure. Join our
                   collective of designers and developers.
                 </p>
 
-                <div className="grid md:grid-cols-3 gap-8 mt-12 mb-12">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12 mb-8 sm:mb-12">
                   <div className="text-center">
                     <h3
-                      className="text-2xl font-medium text-[#F5F5F5] mb-3"
+                      className="text-xl sm:text-2xl font-medium text-[#F5F5F5] mb-2 sm:mb-3"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Creative Freedom
                     </h3>
                     <p
-                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      className="text-sm sm:text-base text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Push boundaries and explore new ideas
                     </p>
                   </div>
                   <div className="text-center">
-                    <h3 className="text-2xl font-display text-[#F5F5F5] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-display text-[#F5F5F5] mb-2 sm:mb-3">
                       Learning Culture
                     </h3>
                     <p
-                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      className="text-sm sm:text-base text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Grow alongside talented peers
                     </p>
                   </div>
                   <div className="text-center">
-                    <h3 className="text-2xl font-display text-[#F5F5F5] mb-3">
+                    <h3 className="text-xl sm:text-2xl font-display text-[#F5F5F5] mb-2 sm:mb-3">
                       Impact Projects
                     </h3>
                     <p
-                      className="text-[rgba(245,245,245,0.5)] font-light"
+                      className="text-sm sm:text-base text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Work on impactful projects
@@ -270,14 +270,15 @@ export default function Careers() {
                 variants={fadeInUp}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
+                className="px-4 sm:px-0"
               >
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="group inline-flex items-center gap-2 px-8 py-4 text-lg bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+                  className="group inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
                 >
                   Apply Now
                   <svg
-                    className="w-5 h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                    className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -318,15 +319,15 @@ export default function Careers() {
                 className="fixed inset-0 z-[101] flex items-center justify-center p-4 overflow-y-auto"
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="bg-[#0E0E0E] border border-[rgba(245,245,245,0.2)] max-w-2xl w-full my-8 relative">
+                <div className="bg-[#0E0E0E] border border-[rgba(245,245,245,0.2)] max-w-2xl w-full my-4 sm:my-8 relative">
                   {/* Close Button */}
                   <button
                     onClick={() => setIsModalOpen(false)}
-                    className="absolute top-6 right-6 text-[#9a9a9a] hover:text-[#F5F5F5] transition-colors"
+                    className="absolute top-4 right-4 sm:top-6 sm:right-6 text-[#9a9a9a] hover:text-[#F5F5F5] transition-colors z-10"
                     aria-label="Close modal"
                   >
                     <svg
-                      className="w-6 h-6"
+                      className="w-5 h-5 sm:w-6 sm:h-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -341,26 +342,29 @@ export default function Careers() {
                   </button>
 
                   {/* Modal Content */}
-                  <div className="p-8 md:p-12">
+                  <div className="p-6 sm:p-8 md:p-12">
                     <h2
-                      className="text-3xl md:text-4xl font-medium text-[#F5F5F5] mb-2"
+                      className="text-2xl sm:text-3xl md:text-4xl font-medium text-[#F5F5F5] mb-2 pr-8"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Apply to Ginsei
                     </h2>
                     <p
-                      className="text-[rgba(245,245,245,0.5)] mb-8 font-light"
+                      className="text-sm sm:text-base text-[rgba(245,245,245,0.5)] mb-6 sm:mb-8 font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
                       Fill in your details and we'll get back to you soon.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form
+                      onSubmit={handleSubmit}
+                      className="space-y-4 sm:space-y-6"
+                    >
                       {/* Full Name */}
                       <div>
                         <label
                           htmlFor="fullName"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -374,7 +378,7 @@ export default function Careers() {
                           value={formData.fullName}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -386,7 +390,7 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -400,7 +404,7 @@ export default function Careers() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -412,7 +416,7 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="collegeName"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -426,7 +430,7 @@ export default function Careers() {
                           value={formData.collegeName}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -438,7 +442,7 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="role"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -451,7 +455,7 @@ export default function Careers() {
                           value={formData.role}
                           onChange={handleInputChange}
                           required
-                          className="w-full px-4 py-3 bg-[#0E0E0E] border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-[#0E0E0E] border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] focus:outline-none focus:border-[#F5F5F5] transition-colors"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -468,7 +472,7 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="resume"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -483,7 +487,7 @@ export default function Careers() {
                             onChange={handleFileChange}
                             required
                             accept=".pdf,.doc,.docx"
-                            className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:bg-[#F5F5F5] file:text-[#0E0E0E] hover:file:bg-[#e5e5e5] file:cursor-pointer cursor-pointer focus:outline-none focus:border-[#F5F5F5] transition-colors"
+                            className="w-full px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] file:mr-3 sm:file:mr-4 file:py-1.5 sm:file:py-2 file:px-3 sm:file:px-4 file:border-0 file:text-xs sm:file:text-sm file:bg-[#F5F5F5] file:text-[#0E0E0E] hover:file:bg-[#e5e5e5] file:cursor-pointer cursor-pointer focus:outline-none focus:border-[#F5F5F5] transition-colors"
                             style={{
                               fontFamily: "var(--font-inter), sans-serif",
                             }}
@@ -491,7 +495,7 @@ export default function Careers() {
                         </div>
                         {formData.resume && (
                           <p
-                            className="text-sm text-[rgba(245,245,245,0.5)] mt-2 font-light"
+                            className="text-xs sm:text-sm text-[rgba(245,245,245,0.5)] mt-2 font-light"
                             style={{
                               fontFamily: "var(--font-inter), sans-serif",
                             }}
@@ -505,7 +509,7 @@ export default function Careers() {
                       <div>
                         <label
                           htmlFor="importantLinks"
-                          className="block text-sm text-[#F5F5F5] mb-2"
+                          className="block text-xs sm:text-sm text-[#F5F5F5] mb-2"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -526,7 +530,7 @@ export default function Careers() {
                           value={formData.importantLinks}
                           onChange={handleInputChange}
                           rows={3}
-                          className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors resize-none"
+                          className="w-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.4)] focus:outline-none focus:border-[#F5F5F5] transition-colors resize-none"
                           style={{
                             fontFamily: "var(--font-inter), sans-serif",
                           }}
@@ -535,18 +539,18 @@ export default function Careers() {
                       </div>
 
                       {/* Submit Button */}
-                      <div className="pt-4">
+                      <div className="pt-2 sm:pt-4">
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="group w-full inline-flex items-center justify-center gap-2 px-6 py-4 text-base bg-[#F5F5F5] text-[#0E0E0E] font-medium hover:bg-[#e5e5e5] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="group w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 sm:py-4 text-sm sm:text-base bg-[#F5F5F5] text-[#0E0E0E] font-medium hover:bg-[#e5e5e5] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting
                             ? "Submitting..."
                             : "Submit Application"}
                           {!isSubmitting && (
                             <svg
-                              className="w-5 h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                              className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
@@ -567,7 +571,7 @@ export default function Careers() {
                         <motion.div
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className={`mt-4 p-4 border text-center ${
+                          className={`mt-3 sm:mt-4 p-3 sm:p-4 border text-center text-sm sm:text-base ${
                             submitMessage.includes("successfully")
                               ? "border-green-500/30 bg-green-500/10 text-green-400"
                               : "border-red-500/30 bg-red-500/10 text-red-400"
