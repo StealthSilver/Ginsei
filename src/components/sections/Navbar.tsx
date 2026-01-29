@@ -70,94 +70,116 @@ export default function Navbar() {
           : "bg-[#0E0E0E] pt-0"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className={`flex items-center justify-between py-3 px-4 transition-all duration-700 ease-in-out border ${
+          className={`flex items-center py-3 px-3 sm:px-4 transition-all duration-700 ease-in-out border ${
             isScrolled
               ? "border-[#9a9a9a]/30 shadow-lg shadow-[#9a9a9a]/10"
               : "border-transparent"
           }`}
         >
-          {/* Logo and Navigation - Left */}
-          <div className="flex items-center gap-12">
-            {/* Logo */}
+          {/* Mobile Layout - Logo Centered with Hamburger on Right */}
+          <div className="md:hidden flex items-center justify-center w-full relative">
+            {/* Logo - Centered */}
             <a
               href="/"
               onClick={handleLogoClick}
-              className="shrink-0 flex items-center rounded-sm cursor-pointer"
+              className="flex items-center rounded-sm cursor-pointer"
             >
               <Image
                 src="/ginseil.svg"
                 alt="Ginseil Logo"
-                width={140}
-                height={36}
-                className="block h-9 w-auto"
+                width={120}
+                height={30}
+                className="block h-7 sm:h-8 w-auto"
                 priority
               />
             </a>
 
-            {/* Navigation Links (Desktop) */}
-            <div className="hidden md:flex items-center gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="inline-flex items-center px-2 py-2.5 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
+            {/* Mobile Menu Button - Absolute Right */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="absolute right-0 flex flex-col gap-1.5 p-2 rounded-sm"
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              <span
+                className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
+                  isMenuOpen ? "rotate-45 translate-y-2" : ""
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
+                  isMenuOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
+                  isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+                }`}
+              />
+            </button>
+          </div>
+
+          {/* Desktop Layout - Logo Left, Nav Center, CTA Right */}
+          <div className="hidden md:flex items-center justify-between w-full">
+            {/* Logo and Navigation - Left */}
+            <div className="flex items-center gap-12">
+              {/* Logo */}
+              <a
+                href="/"
+                onClick={handleLogoClick}
+                className="shrink-0 flex items-center rounded-sm cursor-pointer"
+              >
+                <Image
+                  src="/ginseil.svg"
+                  alt="Ginseil Logo"
+                  width={140}
+                  height={36}
+                  className="block h-9 w-auto"
+                  priority
+                />
+              </a>
+
+              {/* Navigation Links (Desktop) */}
+              <div className="flex items-center gap-6">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="inline-flex items-center px-2 py-2.5 text-[15px] leading-none font-normal text-(--text-secondary) cursor-pointer hover:text-(--text-primary) transition-colors duration-200 rounded-sm"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* CTA Button - Right (Desktop) */}
+            <div>
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, "#contact")}
+                className="group inline-flex items-center gap-2 px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+              >
+                Connect
+                <svg
+                  className="w-4 h-4 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                  {link.label}
-                </a>
-              ))}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
             </div>
           </div>
-
-          {/* CTA Button - Right (Desktop) */}
-          <div className="hidden md:block">
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
-              className="group inline-flex items-center gap-2 px-6 py-2.5 text-[15px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
-            >
-              Connect
-              <svg
-                className="w-4 h-4 transition-transform duration-500 delay-75 group-hover:translate-x-1"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </a>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden flex flex-col gap-1.5 p-2 rounded-sm"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            <span
-              className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
-                isMenuOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`w-6 h-0.5 bg-[#F5F5F5] transition-all duration-300 ${
-                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
-          </button>
         </div>
       </div>
 
