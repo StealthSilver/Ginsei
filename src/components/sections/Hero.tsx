@@ -1,10 +1,27 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 export default function Hero() {
   const text1 = "Crafting Digital";
   const text2 = "Excellence";
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [rotationAngle, setRotationAngle] = useState(0);
+
+  // Progressive animation configuration
+  const offset = 100; // Shift right by 100px
+  const startX = 1050 + offset; // Central starting position for all dots
+  const startY = 350;
+
+  // Initialize all dots at center position
+  const dotRefs = useRef<Array<{ x: number; y: number }>>([
+    { x: startX, y: startY },
+    { x: startX, y: startY },
+    { x: startX, y: startY },
+    { x: startX, y: startY },
+    { x: startX, y: startY },
+  ]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -54,8 +71,289 @@ export default function Hero() {
     },
   };
 
+  // Final positions for each dot
+  const finalPositions = [
+    { x: 900 + offset, y: 200 }, // Dot 0
+    { x: 1100 + offset, y: 150 }, // Dot 1
+    { x: 1150 + offset, y: 350 }, // Dot 2
+    { x: 1050 + offset, y: 550 }, // Dot 3
+    { x: 1250 + offset, y: 650 }, // Dot 4
+  ];
+
+  // Progressive animation: pairs of dots move sequentially
+  const dots = [
+    {
+      // Dot 0 - moves first
+      start: { x: startX, y: startY },
+      end: finalPositions[0],
+      delay: 0.5,
+      duration: 1.5,
+    },
+    {
+      // Dot 1 - moves with Dot 0
+      start: { x: startX, y: startY },
+      end: finalPositions[1],
+      delay: 0.5,
+      duration: 1.5,
+    },
+    {
+      // Dot 2 - moves second
+      start: { x: startX, y: startY },
+      end: finalPositions[2],
+      delay: 2.2,
+      duration: 1.5,
+    },
+    {
+      // Dot 3 - moves with Dot 2
+      start: { x: startX, y: startY },
+      end: finalPositions[3],
+      delay: 2.2,
+      duration: 1.5,
+    },
+    {
+      // Dot 4 - moves last
+      start: { x: startX, y: startY },
+      end: finalPositions[4],
+      delay: 3.9,
+      duration: 1.5,
+    },
+  ];
+
+  // Animation timeline
+  const DOTS_FINISH_TIME = 5.4; // All dots reach position by this time
+  const LINES_START_TIME = 5.6; // Lines start appearing
+  const LINE_DURATION = 0.15; // Each line takes 0.15s to appear
+  const FACES_START_TIME = 7.3; // Face fills start
+  const FACES_DURATION = 2; // Faces take 2s to fully fill
+  const ROTATION_START_TIME = 9.5; // Rotation starts after faces are filled
+
+  // Define all line pairs that connect the dots
+  const linePairs = [
+    [0, 1],
+    [0, 2],
+    [0, 3],
+    [0, 4], // Lines from dot 0
+    [1, 2],
+    [1, 3],
+    [1, 4], // Lines from dot 1
+    [2, 3],
+    [2, 4], // Lines from dot 2
+    [3, 4], // Line from dot 3
+  ];
+
+  // Canvas-based 3D shape rendering with filled polygons
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Set canvas size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const startTime = Date.now();
+
+    // Define triangular faces connecting the dots
+    const triangles = [
+      [0, 1, 2], // Triangle 1
+      [1, 2, 3], // Triangle 2
+      [2, 3, 4], // Triangle 3
+      [0, 2, 3], // Triangle 4
+      [0, 3, 4], // Triangle 5
+      [0, 1, 4], // Triangle 6
+      [1, 3, 4], // Triangle 7
+    ];
+
+    let animationFrameId: number;
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const positions = dotRefs.current;
+      const elapsed = (Date.now() - startTime) / 1000;
+
+      // Progressive animation timing for faces
+      const facesProgress = Math.max(
+        0,
+        Math.min(1, (elapsed - FACES_START_TIME) / FACES_DURATION),
+      );
+
+      // Calculate rotation angle (starts after faces are filled)
+      let currentRotationAngle = 0;
+      if (elapsed >= ROTATION_START_TIME) {
+        currentRotationAngle = (elapsed - ROTATION_START_TIME) * 0.3; // Slow rotation
+        setRotationAngle(currentRotationAngle);
+      }
+
+      // Calculate center point for rotation and gradient origin
+      const centerX =
+        positions.reduce((sum, p) => sum + p.x, 0) / positions.length;
+      const centerY =
+        positions.reduce((sum, p) => sum + p.y, 0) / positions.length;
+
+      // Apply 3D rotation around Y-axis (vertical axis) to positions if rotation has started
+      const rotatedPositions = positions.map((pos) => {
+        if (currentRotationAngle === 0) return pos;
+
+        const dx = pos.x - centerX;
+        const dy = pos.y - centerY;
+
+        // 3D rotation around Y-axis: scale X coordinate based on cosine for perspective
+        return {
+          x: centerX + dx * Math.cos(currentRotationAngle),
+          y: pos.y, // Y stays the same for vertical axis rotation
+        };
+      });
+
+      // Draw filled triangular faces with 3D shading effect (only after lines are drawn)
+      if (facesProgress > 0) {
+        triangles.forEach((triangle, idx) => {
+          const [i, j, k] = triangle;
+          const p1 = rotatedPositions[i];
+          const p2 = rotatedPositions[j];
+          const p3 = rotatedPositions[k];
+
+          // Calculate triangle center for z-depth simulation
+          const triCenterX = (p1.x + p2.x + p3.x) / 3;
+          const triCenterY = (p1.y + p2.y + p3.y) / 3;
+
+          // Calculate distance from canvas center for depth effect
+          const distFromCenter = Math.sqrt(
+            Math.pow(triCenterX - centerX, 2) +
+              Math.pow(triCenterY - centerY, 2),
+          );
+
+          // Simulate 3D depth based on position
+          const zDepth = Math.sin(elapsed + idx * 0.5) * 0.5 + 0.5;
+
+          // Metallic gray shading with 3D effect
+          // Use lightness values to create metallic appearance
+          const baseLightness = 50 + zDepth * 25; // Range: 50-75 for highlights
+          const midLightness = 35 + zDepth * 15; // Range: 35-50 for mid-tones
+          const darkLightness = 20 + zDepth * 10; // Range: 20-30 for shadows
+
+          // Create radial gradient for 3D metallic effect
+          const gradientRadius = Math.max(
+            Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2)),
+            Math.sqrt(Math.pow(p3.x - p1.x, 2) + Math.pow(p3.y - p1.y, 2)),
+          );
+
+          const gradient = ctx.createRadialGradient(
+            triCenterX,
+            triCenterY,
+            0,
+            triCenterX,
+            triCenterY,
+            gradientRadius,
+          );
+
+          // Animated fill opacity with progressive reveal
+          const baseOpacity = facesProgress * 0.3;
+          const midOpacity = facesProgress * 0.2;
+          const edgeOpacity = facesProgress * 0.15;
+
+          // Metallic gradient: bright center (reflection), mid-tone, dark edges (shadow)
+          gradient.addColorStop(
+            0,
+            `hsla(0, 0%, ${baseLightness}%, ${baseOpacity})`,
+          );
+          gradient.addColorStop(
+            0.4,
+            `hsla(0, 0%, ${midLightness}%, ${midOpacity})`,
+          );
+          gradient.addColorStop(
+            1,
+            `hsla(0, 0%, ${darkLightness}%, ${edgeOpacity})`,
+          );
+
+          // Fill the triangle
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.lineTo(p3.x, p3.y);
+          ctx.closePath();
+          ctx.fill();
+
+          // Draw glowing edges with gray gradient for metallic effect
+          ctx.strokeStyle = `hsla(0, 0%, ${baseLightness + 15}%, ${facesProgress * 0.4})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        });
+      }
+
+      // Draw connecting lines one by one
+      linePairs.forEach((pair, pairIndex) => {
+        const [i, j] = pair;
+
+        // Calculate when this specific line should appear
+        const lineStartTime = LINES_START_TIME + pairIndex * LINE_DURATION;
+        const lineProgress = Math.max(
+          0,
+          Math.min(1, (elapsed - lineStartTime) / LINE_DURATION),
+        );
+
+        if (lineProgress > 0) {
+          const p1 = rotatedPositions[i];
+          const p2 = rotatedPositions[j];
+
+          // Calculate intermediate point for line drawing animation
+          const currentX = p1.x + (p2.x - p1.x) * lineProgress;
+          const currentY = p1.y + (p2.y - p1.y) * lineProgress;
+
+          const opacity = Math.min(lineProgress, 0.3);
+
+          const gradient = ctx.createLinearGradient(
+            p1.x,
+            p1.y,
+            currentX,
+            currentY,
+          );
+          // Metallic gray lines for wireframe
+          gradient.addColorStop(0, `rgba(180, 180, 180, ${opacity})`);
+          gradient.addColorStop(0.5, `rgba(160, 160, 160, ${opacity * 0.6})`);
+          gradient.addColorStop(1, `rgba(180, 180, 180, ${opacity})`);
+
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(currentX, currentY);
+          ctx.stroke();
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  // Calculate center point for rotation
+  const centerX =
+    finalPositions.reduce((sum, p) => sum + p.x, 0) / finalPositions.length;
+  const centerY =
+    finalPositions.reduce((sum, p) => sum + p.y, 0) / finalPositions.length;
+
   return (
     <section className="relative h-screen flex items-center bg-[#0E0E0E] overflow-hidden">
+      {/* Canvas for connecting lines */}
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0 pointer-events-none"
+        style={{ zIndex: 1 }}
+      />
+
       {/* Subtle animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
@@ -74,112 +372,60 @@ export default function Hero() {
         {/* Subtle grid lines */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:80px_80px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]" />
 
-        {/* Snake-like animated dots following grid borders */}
-        {/* Dot 1 - Complex path following grid edges */}
+        {/* Rotating container for dots */}
         <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
+          className="absolute inset-0"
           style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
+            transformOrigin: `${centerX}px ${centerY}px`,
+            perspective: "1000px",
+            transformStyle: "preserve-3d",
           }}
           animate={{
-            x: [
-              800, 880, 880, 960, 960, 1040, 1040, 1120, 1120, 1040, 1040, 960,
-              960, 880, 880, 800,
-            ],
-            y: [
-              160, 160, 240, 240, 320, 320, 400, 400, 320, 320, 240, 240, 160,
-              160, 160, 160,
-            ],
+            rotateY: rotationAngle * (180 / Math.PI), // Convert radians to degrees for Y-axis rotation
           }}
           transition={{
-            duration: 11,
-            repeat: Infinity,
+            duration: 0,
             ease: "linear",
           }}
-        />
-
-        {/* Dot 2 - Different path following grid edges */}
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [
-              960, 1040, 1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040,
-              960, 960,
-            ],
-            y: [80, 80, 160, 160, 240, 240, 320, 320, 240, 240, 160, 160, 80],
-          }}
-          transition={{
-            duration: 13,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 4,
-          }}
-        />
-
-        {/* Dot 3 - Another path following grid edges */}
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [
-              1040, 1120, 1120, 1200, 1200, 1120, 1120, 1040, 1040, 960, 960,
-              1040,
-            ],
-            y: [240, 240, 320, 320, 400, 400, 480, 480, 400, 400, 320, 320],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 2,
-          }}
-        />
-
-        {/* Dot 4 - Bottom right path */}
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [960, 1040, 1040, 1120, 1120, 1040, 1040, 960, 960],
-            y: [480, 480, 560, 560, 640, 640, 560, 560, 480],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 6,
-          }}
-        />
-
-        {/* Dot 5 - Bottom right path */}
-        <motion.div
-          className="absolute w-2 h-2 rounded-full -translate-x-1 -translate-y-1"
-          style={{
-            background: "#9a9a9a",
-            boxShadow: "0 0 8px #9a9a9a, 0 0 16px rgba(154, 154, 154, 0.4)",
-          }}
-          animate={{
-            x: [1120, 1200, 1200, 1280, 1280, 1200, 1200, 1120, 1120],
-            y: [560, 560, 640, 640, 720, 720, 640, 640, 560],
-          }}
-          transition={{
-            duration: 11,
-            repeat: Infinity,
-            ease: "linear",
-            delay: 7,
-          }}
-        />
+        >
+          {/* Progressive animated dots - vertices of the 3D shape */}
+          {dots.map((dot, index) => (
+            <motion.div
+              key={index}
+              className="absolute w-3 h-3 rounded-full -translate-x-1.5 -translate-y-1.5"
+              style={{
+                background: "linear-gradient(135deg, #d0d0d0 0%, #909090 100%)",
+                boxShadow:
+                  "0 0 12px rgba(200, 200, 200, 0.5), 0 0 24px rgba(160, 160, 160, 0.3)",
+                zIndex: 3,
+              }}
+              initial={{
+                x: dot.start.x,
+                y: dot.start.y,
+                opacity: 1,
+              }}
+              animate={{
+                x: dot.end.x,
+                y: dot.end.y,
+                opacity: 1,
+              }}
+              transition={{
+                duration: dot.duration,
+                delay: dot.delay,
+                ease: [0.4, 0, 0.2, 1],
+              }}
+              onUpdate={(latest: any) => {
+                // Update the ref position for canvas to read
+                if (latest.x !== undefined && latest.y !== undefined) {
+                  dotRefs.current[index] = {
+                    x: latest.x,
+                    y: latest.y,
+                  };
+                }
+              }}
+            />
+          ))}
+        </motion.div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
