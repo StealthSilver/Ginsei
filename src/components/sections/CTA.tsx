@@ -149,8 +149,13 @@ export default function CTA() {
           {/* Main heading - Letter by letter animation */}
           <div className="mb-12">
             <h2
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
-              style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              className="text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl leading-[1.2] font-medium text-[#F5F5F5] tracking-tight hyphens-none"
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                wordBreak: "keep-all",
+                overflowWrap: "break-word",
+                whiteSpace: "pre-wrap",
+              }}
             >
               {text1.split("").map((letter, i) => (
                 <motion.span
@@ -160,6 +165,7 @@ export default function CTA() {
                   initial="hidden"
                   animate={isInView ? "visible" : "hidden"}
                   className="inline-block"
+                  style={{ whiteSpace: "pre" }}
                 >
                   {letter === " " ? "\u00A0" : letter}
                 </motion.span>

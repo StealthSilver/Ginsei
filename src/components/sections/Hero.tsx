@@ -199,8 +199,11 @@ export default function Hero() {
           {/* Main heading - Letter by letter animation */}
           <div className="mb-6">
             <h1
-              className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight"
-              style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              className="text-[2.5rem] sm:text-6xl md:text-7xl lg:text-8xl leading-[1.1] font-medium text-[#F5F5F5] tracking-tight hyphens-none"
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                wordBreak: "keep-all",
+              }}
             >
               {text1.split("").map((letter, i) => (
                 <motion.span

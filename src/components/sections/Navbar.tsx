@@ -78,9 +78,9 @@ export default function Navbar() {
               : "border-transparent"
           }`}
         >
-          {/* Mobile Layout - Logo Centered with Hamburger on Right */}
-          <div className="md:hidden flex items-center justify-center w-full relative">
-            {/* Logo - Centered */}
+          {/* Mobile Layout - Logo Left with Hamburger on Right */}
+          <div className="md:hidden flex items-center justify-between w-full">
+            {/* Logo - Left */}
             <a
               href="/"
               onClick={handleLogoClick}
@@ -96,10 +96,10 @@ export default function Navbar() {
               />
             </a>
 
-            {/* Mobile Menu Button - Absolute Right */}
+            {/* Mobile Menu Button - Right */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="absolute right-0 flex flex-col gap-1.5 p-2 rounded-sm"
+              className="flex flex-col gap-1.5 p-2 rounded-sm"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
             >

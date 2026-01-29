@@ -86,8 +86,13 @@ export default function Philosophy() {
             </motion.div>
 
             <blockquote
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5] tracking-tight italic max-w-6xl"
-              style={{ fontFamily: "var(--font-inter), sans-serif" }}
+              className="text-[1.375rem] sm:text-3xl md:text-4xl lg:text-5xl leading-[1.4] font-light text-[#F5F5F5] tracking-tight italic max-w-6xl hyphens-none"
+              style={{
+                fontFamily: "var(--font-inter), sans-serif",
+                wordBreak: "keep-all",
+                overflowWrap: "break-word",
+                whiteSpace: "pre-wrap",
+              }}
             >
               {line1.split("").map((letter, i) => (
                 <motion.span
@@ -97,6 +102,7 @@ export default function Philosophy() {
                   initial="hidden"
                   animate={isInView ? "visible" : "hidden"}
                   className="inline-block"
+                  style={{ whiteSpace: "pre" }}
                 >
                   {letter === " " ? "\u00A0" : letter}
                 </motion.span>
