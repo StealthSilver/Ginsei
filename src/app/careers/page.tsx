@@ -22,8 +22,8 @@ export default function Careers() {
     importantLinks: "",
   });
 
-  const text1 = "Join the";
-  const text2 = "Ginsei";
+  const text1 = "Join the Ginsei";
+  const text2 = "team";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -222,20 +222,10 @@ export default function Careers() {
                   className="text-xl md:text-2xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-8 font-light"
                   style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
-                  At Ginsei, we don't just create digital products — we craft
-                  experiences that resonate and endure. We're a collective of
-                  designers and developers who believe in the power of
-                  thoughtful design and elegant code.
+                  We craft experiences that resonate and endure. Join our
+                  collective of designers and developers.
                 </p>
-                <p
-                  className="text-lg md:text-xl text-[rgba(245,245,245,0.5)] leading-relaxed mb-8 font-light"
-                  style={{ fontFamily: "var(--font-inter), sans-serif" }}
-                >
-                  We're looking for passionate individuals who share our vision
-                  of excellence. Whether you're a designer who thinks in systems
-                  or a developer who appreciates beautiful interfaces, you'll
-                  find a home here.
-                </p>
+
                 <div className="grid md:grid-cols-3 gap-8 mt-12 mb-12">
                   <div className="text-center">
                     <h3
@@ -248,7 +238,7 @@ export default function Careers() {
                       className="text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
-                      Push boundaries and explore new ideas without constraints
+                      Push boundaries and explore new ideas
                     </p>
                   </div>
                   <div className="text-center">
@@ -259,7 +249,7 @@ export default function Careers() {
                       className="text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
-                      Grow alongside talented peers in a supportive environment
+                      Grow alongside talented peers
                     </p>
                   </div>
                   <div className="text-center">
@@ -270,7 +260,7 @@ export default function Careers() {
                       className="text-[rgba(245,245,245,0.5)] font-light"
                       style={{ fontFamily: "var(--font-inter), sans-serif" }}
                     >
-                      Work on meaningful projects that make a difference
+                      Work on impactful projects
                     </p>
                   </div>
                 </div>
