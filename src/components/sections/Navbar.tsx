@@ -2,10 +2,13 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter, usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,17 +22,36 @@ export default function Navbar() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    // Don't prevent default for external routes like /careers
+    e.preventDefault();
+
+    // If it's a route (starts with /), navigate to it
     if (href.startsWith("/")) {
+      router.push(href);
+      setIsMenuOpen(false);
       return;
     }
 
-    e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    // If it's a hash link and we're not on home page, go to home page first
+    if (href.startsWith("#") && pathname !== "/") {
+      router.push("/" + href);
       setIsMenuOpen(false);
+      return;
     }
+
+    // If we're on the home page and it's a hash link, scroll to section
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        setIsMenuOpen(false);
+      }
+    }
+  };
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    router.push("/");
+    setIsMenuOpen(false);
   };
 
   const navLinks = [
@@ -59,7 +81,11 @@ export default function Navbar() {
           {/* Logo and Navigation - Left */}
           <div className="flex items-center gap-12">
             {/* Logo */}
-            <a href="#" className="shrink-0 flex items-center rounded-sm">
+            <a
+              href="/"
+              onClick={handleLogoClick}
+              className="shrink-0 flex items-center rounded-sm cursor-pointer"
+            >
               <Image
                 src="/ginseil.svg"
                 alt="Ginseil Logo"

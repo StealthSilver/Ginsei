@@ -22,8 +22,8 @@ export default function Careers() {
     importantLinks: "",
   });
 
-  const text1 = "Join the Ginsei";
-  const text2 = "team";
+  const text1 = "Join the";
+  const text2 = "Ginsei team";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -177,10 +177,10 @@ export default function Careers() {
                   className="text-6xl md:text-7xl lg:text-8xl font-medium text-[#F5F5F5] leading-[1.1] tracking-tight"
                   style={{ fontFamily: "var(--font-inter), sans-serif" }}
                 >
-                  <div className="inline-block">
+                  <div>
                     {text1.split("").map((char, index) => (
                       <motion.span
-                        key={`${char}-${index}`}
+                        key={`text1-${char}-${index}`}
                         custom={index}
                         variants={letterAnimation}
                         className="inline-block"
@@ -192,11 +192,10 @@ export default function Careers() {
                       </motion.span>
                     ))}
                   </div>
-                  <br />
-                  <div className="inline-block">
+                  <div>
                     {text2.split("").map((char, index) => (
                       <motion.span
-                        key={`${char}-${index}`}
+                        key={`text2-${char}-${index}`}
                         custom={text1.length + index}
                         variants={letterAnimation}
                         className="inline-block"

@@ -8,6 +8,8 @@ export default function CTA() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -17,13 +19,53 @@ export default function CTA() {
   const text1 = "Let's build something";
   const text2 = "that lasts.";
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // You can add your email sending logic here
-    setIsModalOpen(false);
-    setFormData({ fullName: "", email: "", description: "" });
+
+    // Validation
+    if (!formData.fullName || !formData.email || !formData.description) {
+      alert("Please fill in all required fields");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitMessage("");
+
+    try {
+      // Submit to API
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitMessage(result.message);
+        // Reset form
+        setFormData({
+          fullName: "",
+          email: "",
+          description: "",
+        });
+
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          setIsModalOpen(false);
+          setSubmitMessage("");
+        }, 3000);
+      } else {
+        setSubmitMessage("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setSubmitMessage("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (
@@ -236,7 +278,8 @@ export default function CTA() {
                     value={formData.fullName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200 disabled:opacity-50"
                     placeholder="John Doe"
                   />
                 </div>
@@ -256,7 +299,8 @@ export default function CTA() {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200"
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200 disabled:opacity-50"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -275,31 +319,48 @@ export default function CTA() {
                     value={formData.description}
                     onChange={handleInputChange}
                     required
+                    disabled={isSubmitting}
                     rows={4}
-                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200 resize-none"
+                    className="w-full px-4 py-3 bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] placeholder-[rgba(245,245,245,0.3)] focus:outline-none focus:border-[rgba(245,245,245,0.4)] transition-colors duration-200 resize-none disabled:opacity-50"
                     placeholder="Tell us about your project..."
                   />
                 </div>
 
+                {/* Success/Error Message */}
+                {submitMessage && (
+                  <div
+                    className={`text-center py-2 ${
+                      submitMessage.includes("successfully")
+                        ? "text-green-400"
+                        : "text-red-400"
+                    }`}
+                  >
+                    {submitMessage}
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="group w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 text-[16px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200"
+                  disabled={isSubmitting}
+                  className="group w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 text-[16px] leading-none bg-transparent border border-[rgba(245,245,245,0.2)] text-[#F5F5F5] font-medium hover:bg-[#F5F5F5] hover:text-[#0E0E0E] hover:border-[#F5F5F5] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Email
-                  <svg
-                    className="w-5 h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
+                  {isSubmitting ? "Sending..." : "Send Email"}
+                  {!isSubmitting && (
+                    <svg
+                      className="w-5 h-5 transition-transform duration-500 delay-75 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  )}
                 </button>
               </form>
             </motion.div>
