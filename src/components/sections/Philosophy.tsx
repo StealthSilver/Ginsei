@@ -10,7 +10,7 @@ export default function Philosophy() {
 
   const line1 = "Form gives shape to intention.";
   const line2 = "Function gives it purpose.";
-  const line3 = "We design systems where clarity and beauty coexist.";
+  const line3 = "We design systems where\nclarity and beauty coexist.";
 
   const letterAnimation = {
     hidden: { opacity: 0, y: 20 },
