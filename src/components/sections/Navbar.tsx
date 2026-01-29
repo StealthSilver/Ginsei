@@ -13,10 +13,14 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      // Close mobile menu when scrolling
+      if (isMenuOpen) {
+        setIsMenuOpen(false);
+      }
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMenuOpen]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
