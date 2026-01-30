@@ -141,7 +141,7 @@ export default function Careers() {
     <>
       <CreativeCursor />
       <Navbar />
-      <main className="bg-[#0E0E0E]">
+      <main className="bg-[#0E0E0E] cursor-none">
         <section
           className="relative min-h-screen flex items-center bg-[#0E0E0E] overflow-hidden py-20 sm:py-32 pt-24 sm:pt-40"
           ref={ref}
@@ -241,7 +241,10 @@ export default function Careers() {
                     </p>
                   </div>
                   <div className="text-center">
-                    <h3 className="text-xl sm:text-2xl font-display text-[#F5F5F5] mb-2 sm:mb-3">
+                    <h3
+                      className="text-xl sm:text-2xl font-medium text-[#F5F5F5] mb-2 sm:mb-3"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Learning Culture
                     </h3>
                     <p
@@ -252,7 +255,10 @@ export default function Careers() {
                     </p>
                   </div>
                   <div className="text-center">
-                    <h3 className="text-xl sm:text-2xl font-display text-[#F5F5F5] mb-2 sm:mb-3">
+                    <h3
+                      className="text-xl sm:text-2xl font-medium text-[#F5F5F5] mb-2 sm:mb-3"
+                      style={{ fontFamily: "var(--font-inter), sans-serif" }}
+                    >
                       Impact Projects
                     </h3>
                     <p
