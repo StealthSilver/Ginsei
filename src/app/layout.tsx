@@ -27,13 +27,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://gensei.org"),
+  metadataBase: new URL("https://ginsei.org"),
   title: {
-    default: "Gensei — Form & Function",
+    default: "Gensei — Design that works, beautifully",
     template: "%s — Gensei",
   },
   description:
-    "Gensei is a design agency focused on systems, identity, and digital products. We design with clarity, structure, and intent — balancing form and function.",
+    "Gensei is a design agency focused on systems, identity, and digital products.",
   applicationName: "Gensei",
   keywords: [
     "design agency",
@@ -56,32 +56,34 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://gensei.org/",
+    canonical: "https://ginsei.org",
   },
   themeColor: "#0E0E0E",
   openGraph: {
     type: "website",
-    url: "https://gensei.org/",
+    url: "https://ginsei.org",
     siteName: "Gensei",
-    title: "Gensei — Form & Function",
+    title: "Gensei — Design that works, beautifully",
     description:
-      "Gensei is a design agency focused on systems, identity, and digital products. We design with clarity, structure, and intent — balancing form and function.",
+      "Gensei is a design agency focused on systems, identity, and digital products.",
     images: [
       {
-        url: "/geinsei.svg",
+        url: "/ginsei.svg",
+        width: 1200,
+        height: 630,
         alt: "Gensei",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Gensei — Form & Function",
+    title: "Gensei — Design that works, beautifully",
     description:
-      "Gensei is a design agency focused on systems, identity, and digital products. We design with clarity, structure, and intent — balancing form and function.",
-    images: ["/geinsei.svg"],
+      "Gensei is a design agency focused on systems, identity, and digital products.",
+    images: ["/ginsei.svg"],
   },
   icons: {
-    icon: [{ url: "/geinsei.svg", type: "image/svg+xml" }],
+    icon: [{ url: "/ginsei.svg", type: "image/svg+xml" }],
   },
 };
 
@@ -98,11 +100,25 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Gensei",
+    url: "https://ginsei.org",
+    logo: "https://ginsei.org/ginsei.svg",
+  };
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${inter.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
         <CreativeCursor />
         {children}
       </body>
