@@ -22,7 +22,7 @@ export default function Footer() {
                 href="https://twitter.com/gensei"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white transition-all duration-300 group"
+                className="inline-flex items-center justify-center text-gray-300 hover:text-white transition-all duration-300 group"
                 aria-label="Follow us on X"
               >
                 <FaXTwitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
